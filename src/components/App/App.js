@@ -1,7 +1,7 @@
 // корневой компонент приложения
 
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import '../../index.css';
 import Header from '../Header/Header';
@@ -20,37 +20,43 @@ function App() {
     <div className="page">
       <Header />
 
-      <Switch>
+      <Routes>
 
-        <Route path="/" exact>
-          <Main />
-        </Route>
+        <Route
+          path="/"
+          element={<Main />}
+        />
 
-        <Route path="/movies">
-          <Movies />
-        </Route>
+        <Route
+          path="movies"
+          element={<Movies />}
+        />
 
-        <Route path="/saved-movies">
-          <SavedMovies />
-        </Route>
+        <Route
+          path="saved-movies"
+          element={<SavedMovies />}
+        />
 
-        <Route path="/profile">
-          <Profile />
-        </Route>
+        <Route
+          path="profile"
+          element={<Profile />}
+        />
 
-        <Route path="/signin">
-          <Login />
-        </Route>
+        <Route
+          path="signin"
+          element={<Login />}
+        />
 
-        <Route path="/signup">
-          <Register />
-        </Route>
+        <Route
+          path="signup"
+          element={<Register />}
+        />
 
-        <Route>
-          <PageNotFound />
-        </Route>
+        <Route
+          element={<PageNotFound />}
+        />
 
-      </Switch>
+      </Routes>
 
       <Footer />
     </div>
