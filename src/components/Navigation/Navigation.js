@@ -1,8 +1,10 @@
 // компонент, который отвечает за меню навигации на сайте
 
+import './Navigation.css';
+
 function Navigation() {
   return (
-    console.log('Тут будет функция')
+    <p>Компонент в разработке</p>
   );
 }
 

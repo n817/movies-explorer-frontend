@@ -1,5 +1,6 @@
 // корневой компонент приложения
 
+import './App.css';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
@@ -17,7 +18,7 @@ import Footer from '../Footer/Footer';
 function App() {
 
   return (
-    <div className="page">
+    <>
       <Header />
 
       <Routes>
@@ -59,7 +60,7 @@ function App() {
       </Routes>
 
       <Footer />
-    </div>
+    </>
   );
 }
 

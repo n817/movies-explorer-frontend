@@ -1,8 +1,10 @@
 // компонент страницы с сохранёнными карточками фильмов
 
+import './SavedMovies.css';
+
 function SavedMovies() {
   return (
-    console.log('Тут будет функция')
+    <p>Компонент в разработке</p>
   );
 }
 

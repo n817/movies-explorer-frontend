@@ -1,1 +1,22 @@
+/* Общие стили */
 @import url(./vendor/normalize.css);
+@import url(./vendor/fonts/inter/inter.css);
+
+
+/* Стили для страницы */
+.body {
+  font-family: Inter, Arial, sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  background-color: #202020;
+}
+
+.page {
+  min-width: 320px;
+  max-width: 1140px;
+  margin: 0 auto;
+}

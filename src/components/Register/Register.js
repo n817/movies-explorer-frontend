@@ -1,8 +1,10 @@
 // компонент страницы регистрации
 
+import './Register.css';
+
 function Register() {
   return (
-    console.log('Тут будет функция')
+    <p>Компонент в разработке</p>
   );
 }
 

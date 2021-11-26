@@ -1,8 +1,10 @@
 // компонент страницы изменения профиля
 
+import './Profile.css';
+
 function Profile() {
   return (
-    console.log('Тут будет функция')
+    <p>Компонент в разработке</p>
   );
 }
 

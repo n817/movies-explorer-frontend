@@ -1,8 +1,10 @@
 // Компонент страницы 404
 
+import './PageNotFound.css';
+
 function PageNotFound() {
   return (
-    console.log('Тут будет функция')
+    <p>Компонент в разработке</p>
   );
 }
 
