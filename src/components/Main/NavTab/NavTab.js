@@ -4,7 +4,7 @@ import './NavTab.css';
 
 function NavTab() {
   return (
-    <p>Компонент в разработке</p>
+    <p>Компонент NavTab в разработке</p>
   );
 }
 

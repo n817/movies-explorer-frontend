@@ -4,7 +4,7 @@ import './AboutMe.css';
 
 function AboutMe() {
   return (
-    <p>Компонент в разработке</p>
+    <p>Компонент AboutMe в разработке</p>
   );
 }
 

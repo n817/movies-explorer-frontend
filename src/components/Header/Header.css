@@ -1,0 +1,26 @@
+.header {
+  padding: 18px 0;
+}
+
+.header_landing {
+  background-color: #073042;
+}
+
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  min-width: 320px;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.header__logo {
+  width: 38px;
+}
+
+.header__auth-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}

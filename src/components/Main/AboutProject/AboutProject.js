@@ -4,7 +4,7 @@ import './AboutProject.css';
 
 function AboutProject() {
   return (
-    <p>Компонент в разработке</p>
+    <p>Компонент AboutProject в разработке</p>
   );
 }
 

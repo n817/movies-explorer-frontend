@@ -4,7 +4,8 @@
 
 
 /* Стили для страницы */
-.body {
+
+.page {
   font-family: Inter, Arial, sans-serif;
   color: white;
   -moz-osx-font-smoothing: grayscale;
@@ -14,10 +15,4 @@
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
   background-color: #202020;
-}
-
-.page {
-  min-width: 320px;
-  max-width: 1140px;
-  margin: 0 auto;
 }

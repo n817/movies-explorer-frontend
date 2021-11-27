@@ -4,7 +4,7 @@ import './Portfolio.css';
 
 function Portfolio() {
   return (
-    <p>Компонент в разработке</p>
+    <p>Компонент Portfolio в разработке</p>
   );
 }
 

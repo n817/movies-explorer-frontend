@@ -1,0 +1,37 @@
+.promo {
+  background-color: #073042;
+  padding: 75px 0;
+}
+
+.promo__container {
+  display: flex;
+  justify-content: space-between;
+  min-width: 320px;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.promo__content {
+
+}
+
+.promo__header {
+  max-width: 640px;
+  font-weight: normal;
+  font-size: 50px;
+  line-height: 58px;
+  padding-bottom: 36px;
+  margin: 0;
+}
+
+.promo__text {
+  max-width: 310px;
+  font-size: 13px;
+  line-height: 16px;
+  opacity: 0.5;
+  margin: 0;
+}
+
+.promo__logo {
+  width: 310px;
+}
