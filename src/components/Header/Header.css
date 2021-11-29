@@ -16,6 +16,7 @@
 
 .header__logo {
   width: 38px;
+  height: 38px;
 }
 
 .header__auth-section {
@@ -23,4 +24,24 @@
   justify-content: space-between;
   align-items: center;
   gap: 30px;
+}
+
+.header__register-link {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-decoration: none;
+  color: #FFF;
+}
+
+.header__login-button {
+  width: 76px;
+  height: 32px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  background-color: #3DDC84;
+  border-radius: 3px;
+  border: none;
+  outline-style: none;
 }

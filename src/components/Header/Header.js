@@ -2,20 +2,24 @@
 
 import './Header.css';
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 
 function Header( {loggedIn} ) {
-  const { pathname } = useLocation();
 
   return (
     <header className={`header ${loggedIn ? '' : 'header_landing'}`}>
       <div className="header__container">
-        <img src={logo} alt="Логотип" className="header__logo"/>
+        <Link to="/" className="header__logo button-hover">
+          <img src={logo} alt="Логотип"/>
+        </Link>
         <div className="header__auth-section">
-          <div>Регистрация</div>
-          <div>Войти</div>
-          <div>Аккаунт</div>
+          <Link to="/signup" className="header__register-link button-hover">
+            Регистрация
+          </Link>
+          <Link to="/signin">
+            <button className="header__login-button button-hover">Войти</button>
+          </Link>
         </div>
       </div>
     </header>

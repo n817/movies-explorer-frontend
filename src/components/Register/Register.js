@@ -4,7 +4,7 @@ import './Register.css';
 
 function Register() {
   return (
-    <p>Компонент в разработке</p>
+    <p>Компонент Register в разработке</p>
   );
 }
 

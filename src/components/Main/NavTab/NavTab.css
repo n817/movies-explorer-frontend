@@ -1,0 +1,19 @@
+.navtab {
+  background-color: #073042;
+  padding-top: 9px;
+  padding-bottom: 75px;
+}
+
+.navtab__button {
+  width: 129px;
+  height: 36px;
+  color: #FFF;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  border: 1px solid #FFF;
+  box-sizing: border-box;
+  border-radius: 3px;
+  background-color: transparent;
+  opacity: 0.6;
+}

@@ -4,7 +4,7 @@ import './Login.css';
 
 function Login() {
   return (
-    console.log('Тут будет функция')
+    <p>Компонент Login в разработке</p>
   );
 }
 

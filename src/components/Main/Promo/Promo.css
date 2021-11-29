@@ -6,16 +6,13 @@
 .promo__container {
   display: flex;
   justify-content: space-between;
-  min-width: 320px;
-  max-width: 1140px;
-  margin: 0 auto;
 }
 
 .promo__content {
 
 }
 
-.promo__header {
+.promo__title {
   max-width: 640px;
   font-weight: normal;
   font-size: 50px;
