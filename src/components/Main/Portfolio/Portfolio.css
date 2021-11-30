@@ -1,10 +1,14 @@
+.portfolio {
+  padding-top: 100px;
+  padding-bottom: 125px;
+}
+
 .portfolio__title {
   font-weight: 400;
   font-size: 18px;
   line-height: 20px;
   color: #8B8B8B;
   margin: 0;
-  padding-top: 101px;
 }
 
 .portfolio__items {

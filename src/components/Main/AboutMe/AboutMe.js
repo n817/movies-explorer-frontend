@@ -19,14 +19,14 @@ function AboutMe() {
           </p>
           <ul className="about-me__social">
             <li className="about-me__social-item">
-              <a href="https://facebook.com" className="about-me__social-link button-hover" target="_blank" rel="noopener noreferrer">Facebook</a>
+              <a href="https://www.facebook.com/nikolai.gavriushin" className="about-me__social-link button-hover" target="_blank" rel="noopener noreferrer">Facebook</a>
             </li>
             <li className="about-me__social-item">
-              <a href="https://github.com" className="about-me__social-link button-hover" target="_blank" rel="noopener noreferrer">Github</a>
+              <a href="https://github.com/n817" className="about-me__social-link button-hover" target="_blank" rel="noopener noreferrer">Github</a>
             </li>
           </ul>
         </div>
-        <img src={mainPhoto} alt="Фотография создателя сайта" className="about-me__photo"/>
+        <img src={mainPhoto} alt="Фото студента" className="about-me__photo"/>
       </div>
     </section>
   );
