@@ -9,9 +9,9 @@
 .header__container {
   display: flex;
   justify-content: space-between;
-  min-width: 320px;
-  max-width: 1140px;
+  max-width: 1280px;
   margin: 0 auto;
+  padding: 0 70px;
 }
 
 .header__logo {
@@ -44,4 +44,33 @@
   border-radius: 3px;
   border: none;
   outline-style: none;
+}
+
+/* стили для экранов с разрешением менее 1024px по ширине */
+
+@media screen and (max-width: 1023px) {
+  .header__container {
+    padding: 0 30px;
+  }
+}
+
+/* стили для экранов с разрешением менее 650px по ширине */
+
+@media screen and (max-width: 649px) {
+  .header__container {
+    padding: 0 14px;
+  }
+
+  .header__auth-section {
+    gap: 14px;
+  }
+
+  .header__register-link {
+    font-size: 10px;
+  }
+
+  .header__login-button {
+    width: 54px;
+    height: 26px;
+  }
 }

@@ -9,15 +9,15 @@
 }
 
 .promo__content {
-
+  display: flex;
+  flex-direction: column;
 }
 
 .promo__title {
   max-width: 640px;
-  font-weight: normal;
+  font-weight: 400;
   font-size: 50px;
   line-height: 58px;
-  padding-bottom: 36px;
   margin: 0;
 }
 
@@ -27,8 +27,61 @@
   line-height: 16px;
   opacity: 0.5;
   margin: 0;
+  padding-top: 36px;
 }
 
 .promo__logo {
   width: 310px;
+}
+
+/* стили для экранов с разрешением менее 1024px по ширине */
+
+@media screen and (max-width: 1023px) {
+  .promo {
+    padding-top: 140px;
+  }
+
+  .promo__container {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .promo__content {
+    align-items: center;
+  }
+
+  .promo__title {
+    text-align: center;
+    font-size: 40px;
+    line-height: 50px;
+    padding-top: 48px;
+  }
+
+  .promo__text {
+    text-align: center;
+    padding-top: 22px;
+  }
+}
+
+/* стили для экранов с разрешением менее 650px по ширине */
+
+@media screen and (max-width: 649px) {
+  .promo {
+    padding-top: 70px;
+  }
+
+  .promo__title {
+    font-size: 30px;
+    line-height: 38px;
+    letter-spacing: -0.04em;
+    padding-top: 44px;
+  }
+
+  .promo__text {
+    padding-top: 24px;
+  }
+
+  .promo__logo {
+    width: 210px;
+  }
 }

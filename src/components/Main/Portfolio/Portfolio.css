@@ -39,3 +39,51 @@
   content: "";
   background: url("../../../images/portfolio-arrow.svg") no-repeat center;
 }
+
+/* стили для экранов с разрешением менее 1024px по ширине */
+
+@media screen and (max-width: 1023px) {
+  .portfolio {
+    padding-top: 90px;
+    padding-bottom: 90px;
+  }
+
+  .portfolio__item {
+    border-color: #E6E6E6;
+  }
+
+  .portfolio__link {
+    font-size: 28px;
+  }
+
+  .portfolio__link::after {
+    width: 27px;
+  }
+}
+
+/* стили для экранов с разрешением менее 650px по ширине */
+
+@media screen and (max-width: 649px) {
+  .portfolio {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  .portfolio__title {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .portfolio__items {
+    padding-top: 20px;
+  }
+
+  .portfolio__link {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .portfolio__link::after {
+    width: 18px;
+  }
+}
