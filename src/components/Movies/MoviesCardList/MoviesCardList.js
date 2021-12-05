@@ -4,7 +4,7 @@ import './MoviesCardList.css';
 
 function MoviesCardList() {
   return (
-    <p>Компонент в разработке</p>
+    <p>Компонент MoviesCardList в разработке</p>
   );
 }
 
