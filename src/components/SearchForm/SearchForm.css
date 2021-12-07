@@ -1,0 +1,181 @@
+.search {
+  max-width: 1280px;
+  padding: 0 70px;
+  margin: 0 auto;
+}
+
+.search__container {
+  padding: 70px 0;
+  border-bottom: 1px solid #424242;
+}
+
+.search__form {
+  min-height: 72px;
+  width: 100%;
+  display: flex;
+  background-color: #222222;
+  box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+  border-radius: 9px;
+
+}
+
+.search__input-fieldset {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  border: none;
+  border-right: 1px solid #505050;
+  padding: 0 19px;
+  margin: 16px 0;
+}
+
+.search__icon {
+  padding-left: 6px;
+  padding-right: 16px;
+}
+
+.search__input {
+  width: 100%;
+  background: transparent;
+  font-size: 18px;
+  line-height: 20px;
+  color: #FFF;
+  outline: none;
+  border: none;
+}
+
+.search__button {
+  min-width: 59px;
+  min-height: 34px;
+  background: #4285F4;
+  border-radius: 48px;
+  border: none;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 18px;
+  text-align: center;
+  color: #FFF;
+}
+
+.search__options-fieldset {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding: 0 30px;
+  margin: 0;
+}
+
+.search__checkbox {
+  position: relative;
+  width: 34px;
+  height: 14px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.search__checkbox-hidden {
+  position: absolute;
+  width: 1px; /* если у элемента не будет размеров, некоторые браузеры посчитают, что его вообще нет */
+  height: 1px;
+  overflow: hidden; /* без этого свойства тоже сработает, но так наверняка */
+  clip: rect(0 0 0 0);  
+}
+
+.search__checkbox-visible {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #3DDC84;
+  border-radius: 20px;
+}
+
+.search__checkbox-visible:before {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  left: 2px;
+  top: 2px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  content: "";
+  background: #FFF;
+  transition: .5s;
+}
+
+.search__checkbox-hidden:checked + .search__checkbox-visible:before {
+  transform: translateX(20px);
+}
+
+.search__options-text {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  padding-left: 14px;
+}
+
+
+/* стили для экранов с разрешением менее 1024px по ширине */
+
+@media screen and (max-width: 1024px) {
+  .search {
+    padding: 0 30px;
+  }
+
+  .search__container {
+    padding-top: 80px;
+    padding-bottom: 109px;
+  }
+
+  .search__options-fieldset {
+    padding: 0 20px;
+  }
+}
+
+
+/* стили для экранов с разрешением менее 650px по ширине */
+
+@media screen and (max-width: 649px) {
+  .search {
+    padding: 0 10px;
+  }
+
+  .search__container {
+    padding-bottom: 45px;
+  }
+
+  .search__form {
+    flex-direction: column;
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .search__icon {
+    display: none;
+  }
+
+  .search__input-fieldset {
+    width: 100%;
+    border: none;
+    background-color: #222222;
+    box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+    border-radius: 9px;
+    padding: 19px 0;
+    margin: 0;
+  }
+
+  .search__input {
+    margin-left: 19px;
+  }
+
+  .search__button {
+    margin-right: 19px;
+  }
+
+  .search__options-fieldset {
+    margin-top: 45px;
+  }
+}
