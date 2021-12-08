@@ -3,3 +3,26 @@
   opacity: 0.7;
   transition: 0.3s;
 }
+
+.main-content {
+  max-width: 1280px;
+  padding: 0 70px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* стили для экранов с разрешением менее 1024px по ширине */
+
+@media screen and (max-width: 1023px) {
+  .main-content {
+    padding: 0 30px;
+  }
+}
+
+/* стили для экранов с разрешением менее 650px по ширине */
+
+@media screen and (max-width: 649px) {
+  .main-content {
+    padding: 0 10px;
+  }
+}

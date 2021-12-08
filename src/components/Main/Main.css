@@ -2,13 +2,13 @@
 
 }
 
-.section-container {
+.landing-section-container {
   max-width: 1280px;
-  margin: 0 auto;
   padding: 0 70px;
+  margin: 0 auto;
 }
 
-.section-title {
+.landing-section-title {
   font-weight: 400;
   font-size: 22px;
   line-height: 27px;
@@ -21,7 +21,7 @@
 /* стили для экранов с разрешением менее 1024px по ширине */
 
 @media screen and (max-width: 1023px) {
-  .section-container {
+  .landing-section-container {
     padding: 0 50px;
   }
 }
@@ -29,11 +29,11 @@
 /* стили для экранов с разрешением менее 650px по ширине */
 
 @media screen and (max-width: 649px) {
-  .section-container {
+  .landing-section-container {
     padding: 0 14px;
   }
 
-  .section-title {
+  .landing-section-title {
     font-size: 18px;
     line-height: 22px;
     padding-bottom: 28px;

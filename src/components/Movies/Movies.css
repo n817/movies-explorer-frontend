@@ -1,0 +1,22 @@
+.movies__more-button {
+  width: 320px;
+  height: 36px;
+  border: none;
+  border-radius: 6px;
+  background-color: #2F2F2F;
+  text-align: center;
+  color: #FFF;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  margin-top: 50px;
+  margin-bottom: 80px;
+}
+
+/* стили для экранов с разрешением менее 650px по ширине */
+
+@media screen and (max-width: 649px) {
+  .movies__more-button {
+    width: 240px;
+  }
+}

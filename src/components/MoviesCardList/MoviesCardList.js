@@ -1,10 +1,18 @@
 // компонент, который управляет отрисовкой карточек фильмов на страницу и их количеством
 
 import './MoviesCardList.css';
+import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList() {
+function MoviesCardList({ movies }) {
   return (
-    <p>Компонент MoviesCardList в разработке</p>
+    <ul className="movies-card-list">
+      {movies.map((movie) => 
+        <MoviesCard
+          key={movie.id}
+          movie={movie}
+        />
+      )}
+    </ul>
   );
 }
 

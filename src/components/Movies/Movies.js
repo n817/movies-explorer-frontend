@@ -7,16 +7,19 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
-function Movies() {
+function Movies({ movies }) {
   return (
     <>
     <Header>
       <Navigation />
     </Header>
 
-    <main className="main">
+    <main className="main-content">
       <SearchForm />
-      <MoviesCardList />
+      <MoviesCardList 
+        movies={movies}
+      />
+      <button className="movies__more-button button-hover">Ещё</button>
     </main>
 
     <Footer />

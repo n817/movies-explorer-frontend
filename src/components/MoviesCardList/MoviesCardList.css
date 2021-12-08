@@ -1,0 +1,16 @@
+.movies-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  list-style: none;
+  padding: 70px 0 0;
+}
+
+/* стили для экранов с разрешением менее 650px по ширине */
+
+@media screen and (max-width: 649px) {
+  .movies-card-list {
+    align-items: center;
+    gap: 20px;
+  }
+}

@@ -7,16 +7,18 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
-function SavedMovies() {
+function SavedMovies({ savedMovies }) {
   return (
     <>
     <Header>
       <Navigation />
     </Header>
 
-    <main className="main">
+    <main className="main-content saved-movies">
       <SearchForm />
-      <MoviesCardList />
+      <MoviesCardList 
+        movies={savedMovies}
+      />
     </main>
 
     <Footer />
