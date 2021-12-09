@@ -10,20 +10,20 @@ import Footer from '../Footer/Footer';
 function Movies({ movies }) {
   return (
     <>
-    <Header>
-      <Navigation />
-    </Header>
+      <Header>
+        <Navigation />
+      </Header>
 
-    <main className="main-content">
-      <SearchForm />
-      <MoviesCardList 
-        movies={movies}
-      />
-      <button className="movies__more-button button-hover">Ещё</button>
-    </main>
+      <main className="main-content">
+        <SearchForm />
+        <MoviesCardList 
+          movies={movies}
+        />
+        <button className="movies__more-button button-hover">Ещё</button>
+      </main>
 
-    <Footer />
-  </>
+      <Footer />
+    </>
   );
 }
 

@@ -1,5 +1,5 @@
 .navigation {
-  width: 60%;
+  width: 58.5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -31,6 +31,30 @@
   background: url("../../../images/account-logo.svg") no-repeat center #313131;
   border-radius: 50%;
   margin-left: 7px;
+}
+
+/* стили для экранов с разрешением менее 1300px по ширине */
+
+@media screen and (max-width: 1299px) {
+  .navigation {
+    width: 59.5%;
+  }
+}
+
+/* стили для экранов с разрешением менее 1200px по ширине */
+
+@media screen and (max-width: 1199px) {
+  .navigation {
+    width: 60.5%;
+  }
+}
+
+/* стили для экранов с разрешением менее 1100px по ширине */
+
+@media screen and (max-width: 1099px) {
+  .navigation {
+    width: 61.5%;
+  }
 }
 
 /* стили для экранов с разрешением менее 1024px по ширине */
