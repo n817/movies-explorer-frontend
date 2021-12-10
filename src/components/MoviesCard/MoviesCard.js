@@ -8,9 +8,8 @@ import { convertDuration } from '../../utils/utils';
 
 function MoviesCard({ movie }) {
 
-  const {id, duration, image, trailerLink, nameRU} = movie;
+  const {duration, image, trailerLink, nameRU} = movie;
   const { pathname } = useLocation();
-  console.log(pathname);
   const [cardLike, setCardLike] = useState(false);
   const cardLikeButtonClassName = (`card__like-button button-hover ${cardLike ? 'card__like-button_active' : ''}`);
 
@@ -36,8 +35,8 @@ function MoviesCard({ movie }) {
             </button>
         }
       </div>
-      <a href={trailerLink} target="_blank" className="card__link">
-        <img className="card__image" src={`${MOVIES_URL}${image.url}`} />
+      <a href={trailerLink} target="_blank" rel="noopener noreferrer" className="card__link">
+        <img className="card__image" src={`${MOVIES_URL}${image.url}`} alt="Постер к фильму"/>
       </a>
     </li>
   );

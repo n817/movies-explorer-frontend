@@ -1,0 +1,105 @@
+.mobile-navigation {
+  visibility: hidden;
+  opacity: 0;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: rgba(0, 0, 0, .3);
+  transition: visibility 0.5s, opacity 0.5s linear;
+  z-index: 1;
+}
+
+.mobile-navigation_opened {
+  visibility: visible;
+  opacity: 1;
+}
+
+.mobile-navigation__close-button {
+  position: absolute;
+  top: 22px;
+  right: 22px;
+  width: 22px;
+  height: 22px;
+  transform: rotate(45deg);
+  background:
+    linear-gradient(#fff,#fff),
+    linear-gradient(#fff,#fff),
+    transparent;
+  background-position:center;
+  background-size: 22px 3px, 3px 22px;
+  background-repeat: no-repeat;
+  border: none;
+  outline-style: none;
+}
+
+.mobile-navigation__content {
+  width: 520px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #202020
+}
+
+.mobile-navigation__menu {
+  padding-top: 159px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.mobile-navigation__item {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  color: #fff;
+  text-align: center;
+}
+
+.mobile-navigation__item_selected {
+  text-decoration: underline;
+}
+
+.mobile-navigation__account {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 12px;
+  color: #fff;
+  padding-bottom: 90px;
+}
+
+.mobile-navigation__account::after {
+  width: 26px;
+  height: 26px;
+  display: inline-block;
+  content: "";
+  background: url("../../../images/account-logo.svg") no-repeat center #313131;
+  border-radius: 50%;
+  margin-left: 7px;
+}
+
+/* стили для экранов с разрешением менее 650px по ширине */
+
+@media screen and (max-width: 649px) {
+  .mobile-navigation__content {
+    width: 100%;
+  }
+
+  .mobile-navigation__menu {
+    padding-top: 144px;
+  }
+
+  .mobile-navigation__account {
+    padding-bottom: 46px;
+  }
+}
