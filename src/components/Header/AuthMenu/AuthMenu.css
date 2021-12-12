@@ -1,0 +1,45 @@
+.auth-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+.auth-menu__register-link {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-decoration: none;
+  color: #FFF;
+}
+
+.auth-menu__login-button {
+  width: 76px;
+  height: 32px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  background-color: #3DDC84;
+  border-radius: 3px;
+  border: none;
+  outline-style: none;
+}
+
+/* стили для экранов с разрешением менее 650px по ширине */
+
+@media screen and (max-width: 649px) {
+
+  .auth-menu {
+    gap: 14px;
+  }
+
+  .auth-menu__register-link {
+    font-size: 10px;
+  }
+
+  .auth-menu__login-button {
+    width: 54px;
+    height: 26px;
+  }
+}

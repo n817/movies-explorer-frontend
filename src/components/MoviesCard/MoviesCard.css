@@ -1,0 +1,107 @@
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2F2F2F;
+  padding: 6px;
+}
+
+.card__description {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 16px;
+}
+
+.card__info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.card__name {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0;
+}
+
+.card__duration {
+  font-size: 11px;
+  line-height: 13px;
+  color: #8B8B8B;
+  padding-top: 13px;
+  margin: 0;
+}
+
+.card__like-button {
+  width: 14px;
+  height: 12px;
+  background-image: url(../../images/like-button.svg);
+  background-color: transparent;
+  border: none;
+  outline-style: none;
+  padding: 0;
+  margin-top: 30px;
+}
+
+.card__like-button_active {
+  background-image: url(../../images/like-button_active.svg);
+}
+
+.card__like-button_delete {
+  background-image: url(../../images/like-button_delete.svg);
+}
+
+.card__link {
+  width: 220px;
+  height: 122px;
+}
+
+.card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* стили для экранов с разрешением менее 650px по ширине */
+
+@media screen and (max-width: 649px) {
+  .card {
+    max-width: 300px;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    padding: 0;
+  }
+
+  .card__description {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 14px 0;
+  }
+
+  .card__info {
+    margin-left: 12px;
+  }
+
+  .card__link {
+    width: 300px;
+    height: 168px;
+  }
+
+  .card__name {
+    font-size: 12px;
+    line-height: 15px;
+  }
+  
+  .card__duration {
+    padding-top: 8px;
+  }
+
+  .card__like-button {
+    margin-top: 3px;
+    margin-right: 16px;
+  }
+}

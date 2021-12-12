@@ -1,0 +1,129 @@
+.identity-form {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.identity-form__container {
+  width: 396px;
+  display: flex;
+  flex-direction: column;
+  padding: 70px 0;
+}
+
+.identity-form__logo {
+  width: 38px;
+  height: 38px;
+}
+
+.identity-form__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.identity-form__title {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+  padding: 40px 0;
+  margin: 0;
+}
+
+.identity-form__label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #424242;
+  font-size: 10px;
+  line-height: 12px;
+  color: #8B8B8B;
+  padding-bottom: 10px;
+  margin-bottom: 24px;
+}
+
+.identity-form__input {
+  background-color: transparent;
+  border: none;
+  color: #FFF;
+  font-size: 14px;
+  line-height: 17px;
+  margin-top: 5px;
+}
+
+.identity-form__submit-button {
+  min-height: 45px;
+  background: #4285F4;
+  border: none;
+  border-radius: 3px;
+  color: #FFF;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  margin-top: 128px;
+}
+
+.identity-form__error {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
+}
+
+.identity-form__navigation {
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #8B8B8B;
+  padding-top: 16px;
+  margin: 0;
+}
+
+.identity-form__link {
+  text-decoration: none;
+  color: #4285F4;
+  margin-left: 6px;
+}
+
+
+/* стили для экранов с разрешением менее 1024px по ширине */
+
+@media screen and (max-width: 1023px) {
+  .identity-form__container {
+    padding: 232px 0;
+  }
+
+  .identity-form__submit-button {
+    margin-top: 152px;
+  }
+}
+
+/* стили для экранов с разрешением менее 650px по ширине */
+
+@media screen and (max-width: 649px) {
+  .identity-form__container {
+    width: 260px;
+    padding-top: 56px;
+    padding-bottom: 30px;
+    align-items: center;
+  }
+
+  .identity-form__title {
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 80px;
+  }
+
+  .identity-form__submit-button {
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 216px;
+  }
+
+  .identity-form__navigation {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+
