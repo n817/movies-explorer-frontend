@@ -14,6 +14,18 @@ const savedMovies = [
   {"id":10,"nameRU":" Hit So Hard: Школа жизни Патти Шемель","nameEN":"Hit So Hard: The Life & Near Death Story of Patty Schemel","director":"П.Дэвид Эберсол","country":"США","year":"2011","duration":103,"description":"Это история о тех, кто выжил в 90-е, рассказанная от первого лица: Патти Шемель, барабанщица «золотого» состава группы Hole, открытая лесбиянка и подруга Курта Кобейна, сняла более сорока часов видео на 8-миллиметровую пленку еще в самом начале девяностых. Кобейн, держащий на руках дочь, Кортни Лав, бренчащая что-то на гитаре, сама Патти, зачитывающая в слух итоговой номер Rolling Stone за 94-й год — все это легло в основу Hit So Hard, в котором Дэвид Эбесол реконструирует историю всего беспробудного, безнадежного и до сих пор притягательного поколения 90-х","trailerLink":"https://www.youtube.com/watch?v=DMvFMeaGj_w","created_at":"2020-12-02T21:02:28.791Z","updated_at":"2020-12-02T21:02:28.791Z","image":{"id":10,"name":"images","alternativeText":"","caption":"","width":300,"height":168,"formats":{"thumbnail":{"hash":"thumbnail_images_244e1fd56f","ext":".jpeg","mime":"image/jpeg","width":245,"height":137,"size":11.76,"path":null,"url":"/uploads/thumbnail_images_244e1fd56f.jpeg"}},"hash":"images_244e1fd56f","ext":".jpeg","mime":"image/jpeg","size":14.8,"url":"/uploads/images_244e1fd56f.jpeg","previewUrl":null,"provider":"local","provider_metadata":null,"created_at":"2020-12-02T21:01:43.016Z","updated_at":"2020-12-02T21:01:43.016Z"}},
 ];
 
-const MOVIES_URL = 'https://api.nomoreparties.co';
+const mainApiSettings = {
+  baseUrl: 'https://api.movies.n817.ru',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+};
 
-export { movies, savedMovies, MOVIES_URL };
+const moviesApiSettings = {
+  baseUrl: 'https://api.nomoreparties.co',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+};
+
+export { movies, savedMovies, mainApiSettings, moviesApiSettings };
