@@ -1,10 +1,10 @@
 // компонент одной карточки фильма
 
 import './MoviesCard.css';
-import { MOVIES_URL } from '../../utils/constants';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { convertDuration } from '../../utils/utils';
+import { moviesApiSettings } from '../../utils/constants';
 
 function MoviesCard({ movie }) {
 
@@ -36,7 +36,7 @@ function MoviesCard({ movie }) {
         }
       </div>
       <a href={trailerLink} target="_blank" rel="noopener noreferrer" className="card__link">
-        <img className="card__image" src={`${MOVIES_URL}${image.url}`} alt="Постер к фильму"/>
+        <img className="card__image" src={`${moviesApiSettings.baseUrl}${image.url}`} alt="Постер к фильму"/>
       </a>
     </li>
   );
