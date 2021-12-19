@@ -20,6 +20,7 @@
 }
 
 .profile__form-label {
+  position: relative;
   width: 410px;
   display: flex;
   justify-content: space-between;

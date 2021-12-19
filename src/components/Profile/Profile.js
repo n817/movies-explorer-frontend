@@ -5,13 +5,25 @@ import Header from '../Header/Header';
 import Navigation from '../Header/Navigation/Navigation';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useFormWithValidation } from '../../utils/Validation';
-
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
+import validator from 'validator';
 
 function Profile({ onSignOut, onUpdate }) {
 
   const { name, email } = useContext(CurrentUserContext);
   const { values, errors, isValid, handleChange } = useFormWithValidation();
+
+  // Проверка корректности ввода e-mail
+  const [emailError, setEmailError] = useState('');
+  const validateEmail = (e) => {
+    const email = e.target.value;
+    if (validator.isEmail(email)) {
+      setEmailError('');
+    } else {
+      setEmailError('Введите корректный e-mail!');
+    }
+    handleChange(e);
+  }
 
   return (
     <>
@@ -37,10 +49,11 @@ function Profile({ onSignOut, onUpdate }) {
               type="email"
               name="email"
               value={values.email || ''}
-              onChange={handleChange}
+              onChange={(e) => validateEmail(e)}
               className="profile__form-input"
               placeholder="введите e-mail"
             />
+            <span className="identity-form__error">{emailError}</span>
           </label>
         </form>
         <div className="profile__options">

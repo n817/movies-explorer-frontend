@@ -3,10 +3,24 @@
 import './Register.css';
 import IdentityForm from '../IdentityForm/IdentityForm';
 import { useFormWithValidation } from '../../utils/Validation';
+import { useState } from 'react';
+import validator from 'validator';
 
 function Register({ onRegister }) {
 
   const { values, errors, isValid, handleChange } = useFormWithValidation();
+
+  // Проверка корректности ввода e-mail
+  const [emailError, setEmailError] = useState('');
+  const validateEmail = (e) => {
+    const email = e.target.value;
+    if (validator.isEmail(email)) {
+      setEmailError('');
+    } else {
+      setEmailError('Введите корректный e-mail!');
+    }
+    handleChange(e);
+  }
 
   return (
     <IdentityForm
@@ -32,10 +46,11 @@ function Register({ onRegister }) {
           type="email"
           name="email"
           value={values.email || ''}
-          onChange={handleChange}
+          onChange={(e) => validateEmail(e)}
           className="identity-form__input"
           placeholder="введите e-mail"
         />
+        <span className="identity-form__error">{emailError}</span>
       </label>
       <label className="identity-form__label">Пароль
         <input
@@ -46,7 +61,6 @@ function Register({ onRegister }) {
           className="identity-form__input"
           placeholder="введите пароль"
         />
-        <span className="identity-form__error">Что-то пошло не так...</span>
       </label>
     </IdentityForm>
   );
