@@ -45,6 +45,19 @@
   text-align: right;
 }
 
+.profile-form__error {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  font-size: 10px;
+  line-height: 12px;
+  color: #EE3465;
+}
+
+.profile-form__error_email {
+  top: 30px;
+}
+
 .profile__options {
   display: flex;
   flex-direction: column;

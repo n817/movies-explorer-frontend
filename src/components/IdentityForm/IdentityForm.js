@@ -4,7 +4,16 @@ import './IdentityForm.css';
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 
-function IdentityForm( {title, submitButtonText, navigationText, link, linkText, onFormSubmit, children} ) {
+function IdentityForm({
+  title,
+  submitButtonText,
+  navigationText,
+  link,
+  linkText,
+  onFormSubmit,
+  isValid,
+  children
+  }) {
 
   function handleSubmit(evt) {
     evt.preventDefault();

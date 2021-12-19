@@ -30,6 +30,7 @@ function Register({ onRegister }) {
       link="/signin"
       linkText="Войти"
       onFormSubmit={ () => onRegister(values) }
+      isValid={isValid}
     >
       <label className="identity-form__label">Имя
         <input
@@ -39,7 +40,9 @@ function Register({ onRegister }) {
           onChange={handleChange}
           className="identity-form__input"
           placeholder="введите имя" 
+          required
         />
+        <span className="identity-form__error">{errors.name}</span>
       </label>
       <label className="identity-form__label">E-mail
         <input
@@ -49,6 +52,7 @@ function Register({ onRegister }) {
           onChange={(e) => validateEmail(e)}
           className="identity-form__input"
           placeholder="введите e-mail"
+          required
         />
         <span className="identity-form__error">{emailError}</span>
       </label>
@@ -60,7 +64,9 @@ function Register({ onRegister }) {
           onChange={handleChange}
           className="identity-form__input"
           placeholder="введите пароль"
+          required
         />
+        <span className="identity-form__error">{errors.password}</span>
       </label>
     </IdentityForm>
   );

@@ -42,7 +42,9 @@ function Profile({ onSignOut, onUpdate }) {
               onChange={handleChange}
               className="profile__form-input"
               placeholder="введите имя"
+              required
             />
+            <span className="profile-form__error">{errors.name}</span>
           </label>
           <label className="profile__form-label">E-mail
             <input
@@ -52,8 +54,9 @@ function Profile({ onSignOut, onUpdate }) {
               onChange={(e) => validateEmail(e)}
               className="profile__form-input"
               placeholder="введите e-mail"
+              required
             />
-            <span className="identity-form__error">{emailError}</span>
+            <span className="profile-form__error profile-form__error_email">{emailError}</span>
           </label>
         </form>
         <div className="profile__options">

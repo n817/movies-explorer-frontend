@@ -30,6 +30,7 @@ function Login({ onLogin }) {
       link="/signup"
       linkText="Регистрация"
       onFormSubmit={ () => onLogin(values) }
+      isValid={isValid}
     >
       <label className="identity-form__label">E-mail
         <input 
@@ -39,6 +40,7 @@ function Login({ onLogin }) {
           onChange={(e) => validateEmail(e)}
           className="identity-form__input"
           placeholder="введите e-mail"
+          required
         />
         <span className="identity-form__error">{emailError}</span>
       </label>
@@ -50,7 +52,9 @@ function Login({ onLogin }) {
           onChange={handleChange}
           className="identity-form__input"
           placeholder="введите пароль"
+          required
         />
+        <span className="identity-form__error">{errors.password}</span>
       </label>
     </IdentityForm>
   );
