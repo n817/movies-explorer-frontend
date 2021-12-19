@@ -2,7 +2,7 @@
 
 import { mainApiSettings, moviesApiSettings } from "./constants";
 
-class MoviesApi {
+class MainApi {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
     this._headers = headers;
@@ -43,6 +43,23 @@ class MoviesApi {
     .then(this._checkResponse);
   }
 
+  // Выход из профиля
+  signOut() {
+    return fetch(
+      `${this._baseUrl}/signout`,
+      {
+        method: 'POST',
+        credentials: 'include',
+      })
+    .then((res) => {
+      if (res.ok) {
+        return res;
+      }
+      return Promise.reject(`произошла ошибка: ${res.status}`);
+    }
+    );
+  }
+
   // Получение информации о пользователе с сервера
   getMe() {
     return fetch(`${this._baseUrl}/users/me`, {
@@ -62,23 +79,6 @@ class MoviesApi {
     body: JSON.stringify({ name, email })
     })
     .then(this._checkResponse)
-  }
-
-  // Выход из профиля
-  signOut() {
-    return fetch(
-      `${this.baseUrl}/signout`,
-      {
-        method: 'POST',
-        credentials: 'include',
-      })
-    .then((res) => {
-      if (res.ok) {
-        return res;
-      }
-      return Promise.reject(`произошла ошибка: ${res.status}`);
-    }
-    );
   }
 
   // Получение массива сохраненных фильмов с сервера
@@ -131,8 +131,8 @@ class MoviesApi {
 
 
 // Создаем экземпляр класса взаимодействия с API сервера
-const moviesApi = new MoviesApi(mainApiSettings);
+const mainApi = new MainApi(mainApiSettings);
 
 
-export default moviesApi;
+export default mainApi;
 
