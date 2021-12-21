@@ -7,7 +7,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
-function SavedMovies({ savedMovies }) {
+function SavedMovies({ savedMovies, renderedMovies, findMovies, saveMovie, deleteMovie }) {
   return (
     <>
     <Header>
@@ -15,9 +15,14 @@ function SavedMovies({ savedMovies }) {
     </Header>
 
     <main className="main-content saved-movies">
-      <SearchForm />
-      <MoviesCardList 
+      <SearchForm 
         movies={savedMovies}
+        findMovies={findMovies}
+      />
+      <MoviesCardList 
+        movies={renderedMovies}
+        saveMovie={saveMovie}
+        deleteMovie={deleteMovie}
       />
     </main>
 

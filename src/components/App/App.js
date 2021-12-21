@@ -28,13 +28,26 @@ function App() {
   const [filteredMovies, setFilteredMovies] = useState([]); // результаты поиска
   const [renderedMovies, setRenderedMovies] = useState([]); // фильмы, которые отображаются на странице
 
-  // Загрузка данных профиля пользователя
+  // Загружаем базу фильмов с сервера
+  useEffect(() => {
+    moviesApi.getMoviesArray()
+    .then((res) => {
+      setAllMovies(res);
+      console.log(`Загружено фильмов из базы: ${res.length}`);
+      })
+      .catch((err) => {
+        console.log(`При загрузке базы фильмов с сервера ${err}`);
+      });
+  }, [])
+
+  // Загружаем данные профиля пользователя
   useEffect(() => {
     mainApi.getMe()
       .then((res) => {
-        console.log(`Успешно загружены данные пользователя ${res.name}`);
         setCurrentUser(res);
         setLoggedIn(true);
+        console.log(`Успешно загружены данные пользователя ${res.name}`);
+        navigate('/movies');
       })
       .catch((err) => {
         console.log(`При загрузке данных пользователя ${err}`);
@@ -46,9 +59,9 @@ function App() {
     mainApi.signIn({ email, password }) // test@test.com, ghfrnbrev123
       .then((res) => {
         if (res) {
-          console.log(`Успешная авторизация пользователя ${res.name}`);
           setCurrentUser(res);
           setLoggedIn(true);
+          console.log(`Успешная авторизация пользователя ${res.name}`);
           navigate('/movies');
         }
       })
@@ -63,9 +76,9 @@ function App() {
     mainApi.signUp({ name, email, password })
       .then((res) => {
         if (res) {
-          console.log(`Успешная регистрация пользователя ${res.name}`);
           setCurrentUser(res);
           setLoggedIn(true);
+          console.log(`Успешная авторизация пользователя ${res.name}`);
           navigate('/movies');
         }
       })
@@ -93,20 +106,9 @@ function App() {
       })
   }
 
-  // Загружаем базу фильмов с сервера
-  useEffect(() => {
-    moviesApi.getMoviesArray()
-    .then((res) => {
-      setAllMovies(res);
-      console.log(`Успешно загружено ${res.length} фильмов`);
-      })
-      .catch((err) => {
-        console.log(`При загрузке базы фильмов с сервера ${err}`);
-      });
-  }, [])
-
   // Поиск фильмов
   function findMovies({ movies, keyword, isShort }) {
+    getSavedMovies()
     if (!keyword) {
       console.log('Введите ключевое слово!');
       return;
@@ -115,12 +117,42 @@ function App() {
         i.nameRU.toLowerCase().includes(keyword.toLowerCase()) 
         && (isShort ? (i.duration <= 40) : true)
     );
-    setFilteredMovies(filter);
-    if (filteredMovies.length > 0) {
-      console.log(`Поиск успешно завершен, найдено ${filteredMovies.length} фильмов`);
+    if (filter.length > 0) {
+      console.log(`Поиск успешно завершен, найдено фильмов: ${filter.length}`);
+      setFilteredMovies(filter);
     } else {
       console.log('Ничего не найдено')
     }
+  }
+
+  // Сохранение фильма
+  function saveMovie(movie) {
+    console.log(movie, currentUser._id);
+    mainApi.postMovie(movie, currentUser._id)
+    .then((res) => {
+      console.log(res);
+      console.log(`Фильм "${movie.nameRU}" сохранен`)
+    })
+    .catch((err) => {
+      console.log(`При сохранении фильма ${err}`);
+    }); 
+  }
+  
+  // Загрузка сохраненных фильмов
+  function getSavedMovies() {
+    mainApi.getMovies()
+    .then((res) => { 
+      setSavedMovies(res);
+      console.log(`Загружено сохраненных фильмов: ${res.length}`);
+    })
+    .catch((err) => {
+      console.log(`При загрузке сохраненных фильмов ${err}`);
+    });
+  }
+
+  // Удаление фильма из сохраненных
+  function deleteMovie(movie) {
+    console.log(`Фильм "${movie.nameRU}" удален`)
   }
 
   return (
@@ -167,6 +199,8 @@ function App() {
                   allMovies={allMovies}
                   renderedMovies={filteredMovies}
                   findMovies={findMovies}
+                  saveMovie={saveMovie}
+                  deleteMovie={deleteMovie}
                 />
               </RequireAuth>
             }
@@ -176,7 +210,13 @@ function App() {
             path="saved-movies"
             element={
               <RequireAuth loggedIn={loggedIn}>
-                <SavedMovies savedMovies={savedMovies} />
+                <SavedMovies
+                  savedMovies={savedMovies}
+                  renderedMovies={filteredMovies}
+                  findMovies={findMovies}
+                  saveMovie={saveMovie}
+                  deleteMovie={deleteMovie}
+                />
               </RequireAuth>
             }
           />

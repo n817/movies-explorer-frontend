@@ -6,12 +6,26 @@ import { useLocation } from 'react-router-dom';
 import { convertDuration } from '../../utils/utils';
 import { moviesApiSettings } from '../../utils/constants';
 
-function MoviesCard({ movie }) {
+function MoviesCard({ movie, saveMovie, deleteMovie }) {
 
   const {duration, image, trailerLink, nameRU} = movie;
   const { pathname } = useLocation();
   const [cardLike, setCardLike] = useState(false);
   const cardLikeButtonClassName = (`card__like-button button-hover ${cardLike ? 'card__like-button_active' : ''}`);
+
+  function onCardLike() {
+    setCardLike(!cardLike);
+    if (!cardLike) {
+      saveMovie(movie);
+    } 
+    else {
+      deleteMovie(movie);
+    }
+  }
+
+  function onCardDelete() {
+    deleteMovie(movie);
+  }
 
   return (
     <li className="card">
@@ -25,12 +39,13 @@ function MoviesCard({ movie }) {
           ?
             <button
               className="card__like-button button-hover card__like-button_delete"
+              onClick={onCardDelete}
             >
             </button>
           :
             <button 
               className={cardLikeButtonClassName}
-              onClick={setCardLike}
+              onClick={onCardLike}
             >
             </button>
         }
