@@ -14,14 +14,19 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { movies, savedMovies } from '../../utils/constants';
 import RequireAuth from '../RequireAuth/RequireAuth';
 import mainApi from '../../utils/MainApi';
+import moviesApi from '../../utils/MoviesApi';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const navigate = useNavigate();
+
+  const [allMovies, setAllMovies] = useState([]); // вся база фильмов с сервера
+  const [savedMovies, setSavedMovies] = useState([]); // сохраненные фильмы
+  const [filteredMovies, setFilteredMovies] = useState([]); // результаты поиска
+  const [renderedMovies, setRenderedMovies] = useState([]); // фильмы, которые отображаются на странице
 
   // Загрузка данных профиля пользователя
   useEffect(() => {
@@ -88,6 +93,36 @@ function App() {
       })
   }
 
+  // Загружаем базу фильмов с сервера
+  useEffect(() => {
+    moviesApi.getMoviesArray()
+    .then((res) => {
+      setAllMovies(res);
+      console.log(`Успешно загружено ${res.length} фильмов`);
+      })
+      .catch((err) => {
+        console.log(`При загрузке базы фильмов с сервера ${err}`);
+      });
+  }, [])
+
+  // Поиск фильмов
+  function findMovies({ movies, keyword, isShort }) {
+    if (!keyword) {
+      console.log('Введите ключевое слово!');
+      return;
+    }
+    const filter = movies.filter((i) =>
+        i.nameRU.toLowerCase().includes(keyword.toLowerCase()) 
+        && (isShort ? (i.duration <= 40) : true)
+    );
+    setFilteredMovies(filter);
+    if (filteredMovies.length > 0) {
+      console.log(`Поиск успешно завершен, найдено ${filteredMovies.length} фильмов`);
+    } else {
+      console.log('Ничего не найдено')
+    }
+  }
+
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
@@ -128,7 +163,11 @@ function App() {
             path="movies"
             element={
               <RequireAuth loggedIn={loggedIn}>
-                <Movies movies={movies} />
+                <Movies
+                  allMovies={allMovies}
+                  renderedMovies={filteredMovies}
+                  findMovies={findMovies}
+                />
               </RequireAuth>
             }
           />

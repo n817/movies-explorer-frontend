@@ -18,7 +18,7 @@ class MoviesApi {
 
   // Получение массива фильмов с сервера
   getMoviesArray() {
-    return fetch(`${this.baseUrl}/beatfilm-movies`, {
+    return fetch(`${this._baseUrl}/beatfilm-movies`, {
       method: 'GET',
       headers: this._headers
     })

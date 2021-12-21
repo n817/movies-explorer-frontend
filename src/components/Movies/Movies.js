@@ -7,7 +7,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
-function Movies({ movies }) {
+function Movies({ allMovies, renderedMovies, findMovies }) {
   return (
     <>
       <Header>
@@ -15,9 +15,12 @@ function Movies({ movies }) {
       </Header>
 
       <main className="main-content">
-        <SearchForm />
+        <SearchForm
+          movies={allMovies}
+          findMovies={findMovies}
+        />
         <MoviesCardList 
-          movies={movies}
+          movies={renderedMovies}
         />
         <button className="movies__more-button button-hover">Ещё</button>
       </main>
