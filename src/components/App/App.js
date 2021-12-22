@@ -143,6 +143,7 @@ function App() {
   function getSavedMovies() {
     mainApi.getMovies()
     .then((res) => { 
+      console.log(res);
       setSavedMovies(res);
       console.log(`Загружено сохраненных фильмов: ${res.length}`);
     })
@@ -153,7 +154,14 @@ function App() {
 
   // Удаление фильма из сохраненных
   function deleteMovie(movie) {
-    console.log(`Фильм "${movie.nameRU}" удален`)
+    mainApi.deleteMovie(movie._id)
+    .then((res) => { 
+      console.log(`Фильм "${res.movieData.nameRU}" (id: ${res.movieData._id}) успешно удален`);
+      
+    })
+    .catch((err) => {
+      console.log(`При удалении фильма ${err}`);
+    });
   }
 
   return (
