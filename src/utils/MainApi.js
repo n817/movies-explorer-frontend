@@ -92,7 +92,7 @@ class MainApi {
   }
 
   // Сохранение нового фильма на сервер
-  postMovie(movie, userId) {
+  postMovie(movie) {
     const {country, director, duration, year, description, nameRU, nameEN} = movie;
 
     return fetch(`${this._baseUrl}/movies`, {
@@ -108,7 +108,6 @@ class MainApi {
         image: `${moviesApiSettings.baseUrl}${movie.image.url}`,
         trailer: movie.trailerLink,
         thumbnail: `${moviesApiSettings.baseUrl}${movie.image.formats.thumbnail.url}`,
-        owner: userId,
         movieId: movie.id,
         nameRU,
         nameEN

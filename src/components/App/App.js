@@ -127,8 +127,9 @@ function App() {
 
   // Сохранение фильма
   function saveMovie(movie) {
-    console.log(movie, currentUser._id);
-    mainApi.postMovie(movie, currentUser._id)
+    console.log(currentUser);
+    console.log(movie);
+    mainApi.postMovie(movie)
     .then((res) => {
       console.log(res);
       console.log(`Фильм "${movie.nameRU}" сохранен`)
