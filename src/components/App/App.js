@@ -26,19 +26,7 @@ function App() {
   const [allMovies, setAllMovies] = useState([]); // вся база фильмов с сервера
   const [savedMovies, setSavedMovies] = useState([]); // сохраненные фильмы
   const [filteredMovies, setFilteredMovies] = useState([]); // результаты поиска
-  const [renderedMovies, setRenderedMovies] = useState([]); // фильмы, которые отображаются на странице
-
-  // Загружаем базу фильмов с сервера
-  useEffect(() => {
-    moviesApi.getMoviesArray()
-    .then((res) => {
-      setAllMovies(res);
-      console.log(`Загружено фильмов из базы: ${res.length}`);
-      })
-      .catch((err) => {
-        console.log(`При загрузке базы фильмов с сервера ${err}`);
-      });
-  }, [])
+  const [isLoading, setIsLoading] = useState(false); // включает/выключает прелоадер
 
   // Загружаем данные профиля пользователя
   useEffect(() => {
@@ -47,6 +35,7 @@ function App() {
         setCurrentUser(res);
         setLoggedIn(true);
         console.log(`Успешно загружены данные пользователя ${res.name}`);
+        getSavedMovies();
         navigate('/movies');
       })
       .catch((err) => {
@@ -62,6 +51,7 @@ function App() {
           setCurrentUser(res);
           setLoggedIn(true);
           console.log(`Успешная авторизация пользователя ${res.name}`);
+          getSavedMovies();
           navigate('/movies');
         }
       })
@@ -106,16 +96,43 @@ function App() {
       })
   }
 
-  // Поиск фильмов
-  function findMovies({ movies, keyword, isShort }) {
-    getSavedMovies()
+  // Обработка поискового запроса по всей базе фильмов.
+  // (Проверяем: если локальной копии базы нет, то обращаемся за ней на сервер,
+  // если локальная копия есть - передаем ее в функцию поиска)
+  function findMovies({ keyword, isShort }) {
     if (!keyword) {
       console.log('Введите ключевое слово!');
       return;
     }
+    if (allMovies.length === 0) {
+      getAllMovies({ keyword, isShort });
+    } else {
+      filterMovies({ movies: allMovies, keyword, isShort });
+    }
+  }
+
+  // Загрузка базы фильмов с сервера и передача базы в функцию поиска
+  function getAllMovies({ keyword, isShort }) {
+    setIsLoading(true) // to-do!
+    moviesApi.getMoviesArray()
+    .then((res) => {
+      console.log(`Загружено фильмов из базы: ${res.length}`);
+      filterMovies({ movies: res, keyword, isShort });
+      setAllMovies(res);
+      })
+      .catch((err) => {
+        console.log(`При загрузке базы фильмов с сервера ${err}`);
+      })
+      .finally(() => {
+        setIsLoading(false); // to-do!
+      })
+  }
+
+  // Поиск фильмов по ключевому слову
+  function filterMovies({ movies, keyword, isShort }) {
     const filter = movies.filter((i) =>
-        i.nameRU.toLowerCase().includes(keyword.toLowerCase()) 
-        && (isShort ? (i.duration <= 40) : true)
+      i.nameRU.toLowerCase().includes(keyword.toLowerCase()) 
+      && (isShort ? (i.duration <= 40) : true)
     );
     if (filter.length > 0) {
       console.log(`Поиск успешно завершен, найдено фильмов: ${filter.length}`);
@@ -156,7 +173,7 @@ function App() {
   function deleteMovie(movie) {
     mainApi.deleteMovie(movie._id)
     .then((res) => { 
-      console.log(`Фильм "${res.movieData.nameRU}" (id: ${res.movieData._id}) успешно удален`);
+      console.log(`Фильм "${res.movieData.nameRU}" успешно удален. ID: ${res.movieData._id}`);
       
     })
     .catch((err) => {
@@ -206,7 +223,7 @@ function App() {
               <RequireAuth loggedIn={loggedIn}>
                 <Movies
                   allMovies={allMovies}
-                  renderedMovies={filteredMovies}
+                  filteredMovies={filteredMovies}
                   findMovies={findMovies}
                   saveMovie={saveMovie}
                   deleteMovie={deleteMovie}
@@ -221,10 +238,11 @@ function App() {
               <RequireAuth loggedIn={loggedIn}>
                 <SavedMovies
                   savedMovies={savedMovies}
-                  renderedMovies={filteredMovies}
-                  findMovies={findMovies}
+                  filteredMovies={filteredMovies}
+                  findMovies={filterMovies}
                   saveMovie={saveMovie}
                   deleteMovie={deleteMovie}
+                  getSavedMovies={getSavedMovies}
                 />
               </RequireAuth>
             }

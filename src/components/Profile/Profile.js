@@ -11,7 +11,7 @@ import validator from 'validator';
 function Profile({ onSignOut, onUpdate }) {
 
   const { name, email } = useContext(CurrentUserContext);
-  const { values, errors, isValid, handleChange } = useFormWithValidation();
+  const { values, errors, handleChange } = useFormWithValidation();
 
   // Проверка корректности ввода e-mail
   const [emailError, setEmailError] = useState('');

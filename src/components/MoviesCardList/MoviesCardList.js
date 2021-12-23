@@ -3,7 +3,12 @@
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
+import { useState } from 'react';
+
 function MoviesCardList({ movies, saveMovie, deleteMovie }) {
+
+  const [renderedMovies, setRenderedMovies] = useState([]); // фильмы, отображаемые на странице
+
   return (
     <ul className="movies-card-list">
       {movies.map((movie) => 

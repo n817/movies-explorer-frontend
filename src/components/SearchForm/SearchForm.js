@@ -4,23 +4,17 @@ import './SearchForm.css';
 import searchIcon from '../../images/search-icon.svg';
 import { useFormWithValidation } from '../../utils/Validation';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 function SearchForm({ movies, findMovies }) {
 
   const [ isShort, setIsShort ] = useState(false);
-  const { values, handleChange, resetForm } = useFormWithValidation();
+  const { values, handleChange } = useFormWithValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
     findMovies({ movies, keyword: values.name, isShort} );
   }
-
-  useEffect(() => {
-    resetForm({
-      isShort: false
-    })
-  }, [])
 
   return (
     <section className="search">
