@@ -3,10 +3,11 @@
 import './Profile.css';
 import Header from '../Header/Header';
 import Navigation from '../Header/Navigation/Navigation';
+import validator from 'validator';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useFormWithValidation } from '../../utils/Validation';
+
 import { useState, useContext } from 'react';
-import validator from 'validator';
 
 function Profile({ onSignOut, onUpdate }) {
 
@@ -41,7 +42,7 @@ function Profile({ onSignOut, onUpdate }) {
               value={values.name || ''}
               onChange={handleChange}
               className="profile__form-input"
-              placeholder="введите имя"
+              placeholder={name}
               required
             />
             <span className="profile-form__error">{errors.name}</span>
@@ -53,7 +54,7 @@ function Profile({ onSignOut, onUpdate }) {
               value={values.email || ''}
               onChange={(e) => validateEmail(e)}
               className="profile__form-input"
-              placeholder="введите e-mail"
+              placeholder={email}
               required
             />
             <span className="profile-form__error profile-form__error_email">{emailError}</span>

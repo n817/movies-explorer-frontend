@@ -1,8 +1,8 @@
 // Компонент страницы 404
 
-import {useNavigate} from 'react-router-dom';
-
 import './PageNotFound.css';
+
+import {useNavigate} from 'react-router-dom';
 
 function PageNotFound() {
 

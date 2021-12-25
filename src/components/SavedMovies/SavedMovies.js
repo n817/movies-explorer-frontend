@@ -7,7 +7,23 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
-function SavedMovies({ savedMovies, filteredMovies, findMovies, saveMovie, deleteMovie }) {
+import { useEffect } from 'react';
+
+function SavedMovies(
+  { 
+    movies,
+    foundMovies,
+    findMovies,
+    setFoundMovies,
+    saveMovie,
+    deleteMovie,
+    getSavedMovies
+  }) {
+
+  
+  useEffect(() => {
+    getSavedMovies();
+  }, [getSavedMovies]);
 
   return (
     <>
@@ -17,11 +33,12 @@ function SavedMovies({ savedMovies, filteredMovies, findMovies, saveMovie, delet
 
     <main className="main-content saved-movies">
       <SearchForm 
-        movies={savedMovies}
+        movies={movies}
         findMovies={findMovies}
+        setFoundMovies={setFoundMovies}
       />
       <MoviesCardList 
-        movies={filteredMovies}
+        movies={foundMovies}
         saveMovie={saveMovie}
         deleteMovie={deleteMovie}
       />

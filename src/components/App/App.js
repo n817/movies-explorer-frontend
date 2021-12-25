@@ -1,10 +1,6 @@
 // корневой компонент приложения
 
 import './App.css';
-import React from 'react';
-import { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-
 import '../../index.css';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -13,10 +9,13 @@ import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import RequireAuth from '../RequireAuth/RequireAuth';
 import mainApi from '../../utils/MainApi';
 import moviesApi from '../../utils/MoviesApi';
+import RequireAuth from '../RequireAuth/RequireAuth';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+
+import { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -25,8 +24,8 @@ function App() {
 
   const [allMovies, setAllMovies] = useState([]); // вся база фильмов с сервера
   const [savedMovies, setSavedMovies] = useState([]); // сохраненные фильмы
-  const [filteredMovies, setFilteredMovies] = useState([]); // результаты поиска
-  const [isLoading, setIsLoading] = useState(false); // включает/выключает прелоадер
+  const [foundMovies, setFoundMovies] = useState([]); // результаты поиска
+  // const [isLoading, setIsLoading] = useState(false); // включает/выключает прелоадер
 
   // Загружаем данные профиля пользователя
   useEffect(() => {
@@ -35,13 +34,12 @@ function App() {
         setCurrentUser(res);
         setLoggedIn(true);
         console.log(`Успешно загружены данные пользователя ${res.name}`);
-        getSavedMovies();
         navigate('/movies');
       })
       .catch((err) => {
         console.log(`При загрузке данных пользователя ${err}`);
       });
-  }, [])
+  }, [navigate])
 
   // Авторизация
   function handleSignIn({ email, password }) {
@@ -51,7 +49,6 @@ function App() {
           setCurrentUser(res);
           setLoggedIn(true);
           console.log(`Успешная авторизация пользователя ${res.name}`);
-          getSavedMovies();
           navigate('/movies');
         }
       })
@@ -99,7 +96,7 @@ function App() {
   // Обработка поискового запроса по всей базе фильмов.
   // (Проверяем: если локальной копии базы нет, то обращаемся за ней на сервер,
   // если локальная копия есть - передаем ее в функцию поиска)
-  function findMovies({ keyword, isShort }) {
+  function findAllMovies({ keyword, isShort }) {
     if (!keyword) {
       console.log('Введите ключевое слово!');
       return;
@@ -107,36 +104,36 @@ function App() {
     if (allMovies.length === 0) {
       getAllMovies({ keyword, isShort });
     } else {
-      filterMovies({ movies: allMovies, keyword, isShort });
+      findMovies({ movies: allMovies, keyword, isShort });
     }
   }
 
   // Загрузка базы фильмов с сервера и передача базы в функцию поиска
   function getAllMovies({ keyword, isShort }) {
-    setIsLoading(true) // to-do!
+    // setIsLoading(true) // to-do!
     moviesApi.getMoviesArray()
     .then((res) => {
       console.log(`Загружено фильмов из базы: ${res.length}`);
-      filterMovies({ movies: res, keyword, isShort });
+      findMovies({ movies: res, keyword, isShort });
       setAllMovies(res);
       })
       .catch((err) => {
         console.log(`При загрузке базы фильмов с сервера ${err}`);
       })
       .finally(() => {
-        setIsLoading(false); // to-do!
+        // setIsLoading(false); // to-do!
       })
   }
 
   // Поиск фильмов по ключевому слову
-  function filterMovies({ movies, keyword, isShort }) {
+  function findMovies({ movies, keyword, isShort }) {
     const filter = movies.filter((i) =>
       i.nameRU.toLowerCase().includes(keyword.toLowerCase()) 
       && (isShort ? (i.duration <= 40) : true)
     );
     if (filter.length > 0) {
       console.log(`Поиск успешно завершен, найдено фильмов: ${filter.length}`);
-      setFilteredMovies(filter);
+      setFoundMovies(filter);
     } else {
       console.log('Ничего не найдено')
     }
@@ -188,7 +185,9 @@ function App() {
 
           <Route
             path="/"
-            element={<Main />}
+            element={
+              <Main loggedIn={loggedIn} />
+            }
           />
 
           <Route
@@ -222,9 +221,10 @@ function App() {
             element={
               <RequireAuth loggedIn={loggedIn}>
                 <Movies
-                  allMovies={allMovies}
-                  filteredMovies={filteredMovies}
-                  findMovies={findMovies}
+                  movies={allMovies}
+                  foundMovies={foundMovies}
+                  findMovies={findAllMovies}
+                  setFoundMovies={setFoundMovies}
                   saveMovie={saveMovie}
                   deleteMovie={deleteMovie}
                 />
@@ -237,9 +237,10 @@ function App() {
             element={
               <RequireAuth loggedIn={loggedIn}>
                 <SavedMovies
-                  savedMovies={savedMovies}
-                  filteredMovies={filteredMovies}
-                  findMovies={filterMovies}
+                  movies={savedMovies}
+                  foundMovies={foundMovies}
+                  findMovies={findMovies}
+                  setFoundMovies={setFoundMovies}
                   saveMovie={saveMovie}
                   deleteMovie={deleteMovie}
                   getSavedMovies={getSavedMovies}

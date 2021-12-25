@@ -2,9 +2,10 @@
 
 import './Register.css';
 import IdentityForm from '../IdentityForm/IdentityForm';
-import { useFormWithValidation } from '../../utils/Validation';
-import { useState } from 'react';
 import validator from 'validator';
+import { useFormWithValidation } from '../../utils/Validation';
+
+import { useState } from 'react';
 
 function Register({ onRegister }) {
 

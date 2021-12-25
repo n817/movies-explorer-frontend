@@ -1,6 +1,6 @@
-import React from "react";
+// Компонент, отвечающий за защиту роутов
+
 import { Navigate } from "react-router-dom";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function RequireAuth({ loggedIn, children }) {
   return loggedIn === true

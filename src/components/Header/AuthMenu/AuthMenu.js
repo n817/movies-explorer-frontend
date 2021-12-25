@@ -1,7 +1,7 @@
 // компонент, который отвечает за отображение кнопок регистрации/ авторизации на странице лэндинга
 
 import './AuthMenu.css';
-import React from 'react';
+
 import { Link } from 'react-router-dom';
 
 function AuthMenu() {

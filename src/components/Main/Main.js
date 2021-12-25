@@ -1,9 +1,10 @@
 // компонент страницы «О проекте»
-// он будет содержать только презентационные компоненты и в будущем, за исключением шапки навигации
+// он будет содержать только презентационные компоненты, за исключением шапки навигации
 
 import './Main.css';
 import Header from '../Header/Header';
 import AuthMenu from '../Header/AuthMenu/AuthMenu';
+import Navigation from '../Header/Navigation/Navigation';
 import Footer from '../Footer/Footer';
 import Promo from './Promo/Promo';
 import NavTab from './NavTab/NavTab';
@@ -12,11 +13,11 @@ import Techs from './Techs/Techs';
 import AboutMe from './AboutMe/AboutMe';
 import Portfolio from './Portfolio/Portfolio';
 
-function Main() {
+function Main({ loggedIn }) {
   return (
     <>
       <Header isLandingPage='true'>
-        <AuthMenu />
+        {loggedIn ? <Navigation /> : <AuthMenu />}
       </Header>
 
       <main className="main">
