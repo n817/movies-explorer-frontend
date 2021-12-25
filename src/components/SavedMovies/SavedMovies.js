@@ -23,7 +23,7 @@ function SavedMovies(
   
   useEffect(() => {
     getSavedMovies();
-  }, [getSavedMovies]);
+  }, []);
 
   return (
     <>

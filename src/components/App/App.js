@@ -39,7 +39,7 @@ function App() {
       .catch((err) => {
         console.log(`При загрузке данных пользователя ${err}`);
       });
-  }, [navigate])
+  }, [])
 
   // Авторизация
   function handleSignIn({ email, password }) {
