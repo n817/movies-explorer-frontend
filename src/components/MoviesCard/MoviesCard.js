@@ -7,12 +7,13 @@ import { moviesApiSettings } from '../../utils/constants';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-function MoviesCard({ movie, saveMovie, deleteMovie, savedMovies }) {
+function MoviesCard({ movie, saveMovie, deleteMovie, wasLiked }) {
 
   const {duration, image, trailerLink, nameRU} = movie;
   const { pathname } = useLocation();
-  const [cardLike, setCardLike] = useState(false);
-  const cardLikeButtonClassName = (`card__like-button button-hover ${cardLike ? 'card__like-button_active' : ''}`);
+  const [cardLike, setCardLike] = useState(wasLiked);
+  const cardLikeButtonClassName = 
+    (`card__like-button button-hover ${cardLike ? 'card__like-button_active' : ''}`);
 
   function onCardLike() {
     setCardLike(!cardLike);

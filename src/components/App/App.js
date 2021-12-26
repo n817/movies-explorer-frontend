@@ -15,12 +15,13 @@ import RequireAuth from '../RequireAuth/RequireAuth';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 import { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const [allMovies, setAllMovies] = useState([]); // вся база фильмов с сервера
   const [savedMovies, setSavedMovies] = useState([]); // сохраненные фильмы
@@ -167,8 +168,11 @@ function App() {
     mainApi.deleteMovie(movie._id)
     .then((res) => { 
       console.log(`Фильм "${res.movieData.nameRU}" успешно удален. ID: ${res.movieData._id}`);
-      const updateSavedMovies = savedMovies.filter((i) => i.movieId !== res.movieData._id);
-      setSavedMovies(updateSavedMovies);
+      const updateMovies = savedMovies.filter((i) => i.movieId !== res.movieData._id);
+      setSavedMovies(updateMovies);
+      if (pathname === '/saved-movies') {
+        setFoundMovies(updateMovies);
+      }
     })
     .catch((err) => {
       console.log(`При удалении фильма ${err}`);

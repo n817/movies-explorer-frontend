@@ -22,7 +22,7 @@ function MoviesCardList({ movies, saveMovie, deleteMovie, moviesQuantity, savedM
           movie={movie}
           saveMovie={saveMovie}
           deleteMovie={deleteMovie}
-          savedMovies={savedMovies}
+          wasLiked={savedMovies.some((i) => i.movieId === movie.id || i.movieId === movie.movieId)}
         />
       )}
     </ul>
