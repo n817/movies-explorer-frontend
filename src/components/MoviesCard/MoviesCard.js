@@ -7,7 +7,7 @@ import { moviesApiSettings } from '../../utils/constants';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-function MoviesCard({ movie, saveMovie, deleteMovie }) {
+function MoviesCard({ movie, saveMovie, deleteMovie, savedMovies }) {
 
   const {duration, image, trailerLink, nameRU} = movie;
   const { pathname } = useLocation();

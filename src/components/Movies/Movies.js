@@ -16,16 +16,27 @@ function Movies(
     findMovies,
     setFoundMovies,
     saveMovie,
-    deleteMovie
+    deleteMovie,
+    savedMovies
   }) {
 
-  const [moviesQuantity, setMoviesQuantity] = useState();
+  const [moviesQuantity, setMoviesQuantity] = useState(); // Количество фильмов, отображаемых на странице
 
+  // Отображение кнопки "Ещё"
   const moreButtonClassname = `${
     foundMovies.length > moviesQuantity 
     ? "movies__more-button button-hover movies__more-button_visible" 
     : "movies__more-button button-hover"
   }`
+
+  // Сколько карточек загружать при нажатии на кнопку "Ещё"
+  function moviesQuantityStep() {
+    if (window.innerWidth > 649) {
+        return 7;
+    } else {
+        return 5;
+    }
+  };
 
   function setInitialMoviesQuantity() {
     setMoviesQuantity(moviesQuantityStep());
@@ -35,13 +46,7 @@ function Movies(
     setMoviesQuantity(moviesQuantity + moviesQuantityStep());
   }
 
-  function moviesQuantityStep() {
-    if (window.innerWidth > 649) {
-        return 7;
-    } else {
-        return 5;
-    }
-  };
+
 
   return (
     <>
@@ -61,6 +66,7 @@ function Movies(
           moviesQuantity={moviesQuantity}
           saveMovie={saveMovie}
           deleteMovie={deleteMovie}
+          savedMovies={savedMovies}
         />
         <button
           className={moreButtonClassname}

@@ -5,7 +5,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 
 import { useState, useEffect } from 'react';
 
-function MoviesCardList({ movies, saveMovie, deleteMovie, moviesQuantity }) {
+function MoviesCardList({ movies, saveMovie, deleteMovie, moviesQuantity, savedMovies }) {
 
   const [renderedMovies, setRenderedMovies] = useState([]); // фильмы, отображаемые на странице
 
@@ -22,6 +22,7 @@ function MoviesCardList({ movies, saveMovie, deleteMovie, moviesQuantity }) {
           movie={movie}
           saveMovie={saveMovie}
           deleteMovie={deleteMovie}
+          savedMovies={savedMovies}
         />
       )}
     </ul>

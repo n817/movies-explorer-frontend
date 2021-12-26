@@ -20,9 +20,10 @@ function SavedMovies(
     getSavedMovies
   }) {
 
-  const [moviesQuantity, setMoviesQuantity] = useState();
+  const [moviesQuantity, setMoviesQuantity] = useState();  // Количество фильмов, отображаемых на странице
 
   
+  // Загружаем базу сохраненных фильмов
   useEffect(() => {
     getSavedMovies();
   }, []);
@@ -49,6 +50,7 @@ function SavedMovies(
         moviesQuantity={moviesQuantity}
         saveMovie={saveMovie}
         deleteMovie={deleteMovie}
+        savedMovies={movies}
       />
     </main>
 

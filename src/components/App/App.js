@@ -167,7 +167,8 @@ function App() {
     mainApi.deleteMovie(movie._id)
     .then((res) => { 
       console.log(`Фильм "${res.movieData.nameRU}" успешно удален. ID: ${res.movieData._id}`);
-      
+      const updateSavedMovies = savedMovies.filter((i) => i.movieId !== res.movieData._id);
+      setSavedMovies(updateSavedMovies);
     })
     .catch((err) => {
       console.log(`При удалении фильма ${err}`);
@@ -223,6 +224,7 @@ function App() {
                   setFoundMovies={setFoundMovies}
                   saveMovie={saveMovie}
                   deleteMovie={deleteMovie}
+                  savedMovies={savedMovies}
                 />
               </RequireAuth>
             }
