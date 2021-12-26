@@ -7,6 +7,8 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
+import { useState } from 'react';
+
 function Movies(
   { 
     movies,
@@ -16,6 +18,31 @@ function Movies(
     saveMovie,
     deleteMovie
   }) {
+
+  const [moviesQuantity, setMoviesQuantity] = useState();
+
+  const moreButtonClassname = `${
+    foundMovies.length > moviesQuantity 
+    ? "movies__more-button button-hover movies__more-button_visible" 
+    : "movies__more-button button-hover"
+  }`
+
+  function setInitialMoviesQuantity() {
+    setMoviesQuantity(moviesQuantityStep());
+  }
+
+  function handleMoreClick() {
+    setMoviesQuantity(moviesQuantity + moviesQuantityStep());
+  }
+
+  function moviesQuantityStep() {
+    if (window.innerWidth > 649) {
+        return 7;
+    } else {
+        return 5;
+    }
+  };
+
   return (
     <>
       <Header>
@@ -27,13 +54,20 @@ function Movies(
           movies={movies}
           findMovies={findMovies}
           setFoundMovies={setFoundMovies}
+          setInitialMoviesQuantity={setInitialMoviesQuantity}
         />
         <MoviesCardList 
           movies={foundMovies}
+          moviesQuantity={moviesQuantity}
           saveMovie={saveMovie}
           deleteMovie={deleteMovie}
         />
-        <button className="movies__more-button button-hover">Ещё</button>
+        <button
+          className={moreButtonClassname}
+          onClick={handleMoreClick}
+        >
+          Ещё
+        </button>
       </main>
 
       <Footer />

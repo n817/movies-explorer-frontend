@@ -6,17 +6,19 @@ import { useFormWithValidation } from '../../utils/Validation';
 
 import { useState, useEffect } from 'react';
 
-function SearchForm({ movies, findMovies, setFoundMovies }) {
+function SearchForm({ movies, findMovies, setFoundMovies, setInitialMoviesQuantity }) {
 
   const [ isShort, setIsShort ] = useState(false);
   const { values, handleChange } = useFormWithValidation();
 
   useEffect(() => {
     setFoundMovies([]);
+    setInitialMoviesQuantity();
   }, [setFoundMovies]);
 
   function handleSubmit(e) {
     e.preventDefault();
+    setInitialMoviesQuantity();
     findMovies({ movies, keyword: values.name, isShort} );
   }
 

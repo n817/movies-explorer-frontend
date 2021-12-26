@@ -7,7 +7,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 function SavedMovies(
   { 
@@ -20,10 +20,16 @@ function SavedMovies(
     getSavedMovies
   }) {
 
+  const [moviesQuantity, setMoviesQuantity] = useState();
+
   
   useEffect(() => {
     getSavedMovies();
   }, []);
+
+  function setInitialMoviesQuantity() {
+    setMoviesQuantity(movies.length);
+  }
 
   return (
     <>
@@ -36,9 +42,11 @@ function SavedMovies(
         movies={movies}
         findMovies={findMovies}
         setFoundMovies={setFoundMovies}
+        setInitialMoviesQuantity={setInitialMoviesQuantity}
       />
       <MoviesCardList 
         movies={foundMovies}
+        moviesQuantity={moviesQuantity}
         saveMovie={saveMovie}
         deleteMovie={deleteMovie}
       />

@@ -5,14 +5,14 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 
 import { useState, useEffect } from 'react';
 
-function MoviesCardList({ movies, saveMovie, deleteMovie }) {
+function MoviesCardList({ movies, saveMovie, deleteMovie, moviesQuantity }) {
 
   const [renderedMovies, setRenderedMovies] = useState([]); // фильмы, отображаемые на странице
 
   // Загружаем по 7 карточек
   useEffect(() => {
-    setRenderedMovies(movies.slice(0, 7));
-  }, [movies]);
+    setRenderedMovies(movies.slice(0, moviesQuantity));
+  }, [movies, moviesQuantity]);
 
   return (
     <ul className="movies-card-list">

@@ -141,11 +141,8 @@ function App() {
 
   // Сохранение фильма
   function saveMovie(movie) {
-    console.log(currentUser);
-    console.log(movie);
     mainApi.postMovie(movie)
     .then((res) => {
-      console.log(res);
       console.log(`Фильм "${movie.nameRU}" сохранен`)
     })
     .catch((err) => {
@@ -157,7 +154,6 @@ function App() {
   function getSavedMovies() {
     mainApi.getMovies()
     .then((res) => { 
-      console.log(res);
       setSavedMovies(res);
       console.log(`Загружено сохраненных фильмов: ${res.length}`);
     })

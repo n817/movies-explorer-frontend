@@ -52,7 +52,14 @@ function MoviesCard({ movie, saveMovie, deleteMovie }) {
         }
       </div>
       <a href={trailerLink} target="_blank" rel="noopener noreferrer" className="card__link">
-        <img className="card__image" src={`${moviesApiSettings.baseUrl}${pathname === '/saved-movies' ? image : image.url}`} alt="Постер к фильму"/>
+        <img
+          className="card__image"
+          src={
+                pathname === '/saved-movies'
+                ? image
+                : `${moviesApiSettings.baseUrl}${image.url}`
+              }
+          alt="Постер к фильму"/>
       </a>
     </li>
   );
