@@ -5,9 +5,16 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 
 import { useState, useEffect } from 'react';
 
-function MoviesCardList({ movies, saveMovie, deleteMovie, moviesQuantity, savedMovies }) {
-
-  const [renderedMovies, setRenderedMovies] = useState([]); // фильмы, отображаемые на странице
+function MoviesCardList(
+  {
+    movies,
+    savedMovies,
+    renderedMovies,
+    setRenderedMovies,
+    saveMovie,
+    deleteMovie,
+    moviesQuantity
+  }) {
 
   // Загружаем по 7 карточек
   useEffect(() => {
@@ -22,7 +29,7 @@ function MoviesCardList({ movies, saveMovie, deleteMovie, moviesQuantity, savedM
           movie={movie}
           saveMovie={saveMovie}
           deleteMovie={deleteMovie}
-          wasLiked={savedMovies.some((i) => i.movieId === movie.id || i.movieId === movie.movieId)}
+          savedMovies={savedMovies}
         />
       )}
     </ul>

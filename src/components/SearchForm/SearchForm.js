@@ -2,24 +2,33 @@
 
 import './SearchForm.css';
 import searchIcon from '../../images/search-icon.svg';
-import { useFormWithValidation } from '../../utils/Validation';
 
 import { useState, useEffect } from 'react';
 
-function SearchForm({ movies, findMovies, setFoundMovies, setInitialMoviesQuantity }) {
+function SearchForm({ movies, foundMovies, findMovies, setFoundMovies, setInitialMoviesQuantity }) {
 
-  const [ isShort, setIsShort ] = useState(false);
-  const { values, handleChange } = useFormWithValidation();
+  const [keyword, setKeyword] = useState(''); // текст запроса
+  const [isShort, setIsShort] = useState(false); // состояние переключателя короткометражек
 
+  // Очищаем результаты поиска при загрузке страницы
   useEffect(() => {
     setFoundMovies([]);
     setInitialMoviesQuantity();
-  }, [setFoundMovies]);
+  }, []);
+
+  // Фильтр короткометражек в результатах поиска
+  useEffect(() => {
+    if (foundMovies.length > 0) {
+      findMovies({ movies, keyword, isShort });
+    } else {
+      console.log('Нечего фильтровать')
+    }
+  }, [isShort]);
 
   function handleSubmit(e) {
     e.preventDefault();
     setInitialMoviesQuantity();
-    findMovies({ movies, keyword: values.name, isShort} );
+    findMovies({ movies, keyword, isShort });
   }
 
   return (
@@ -31,8 +40,7 @@ function SearchForm({ movies, findMovies, setFoundMovies, setInitialMoviesQuanti
             <input
               type="text"
               name="name"
-              value={values.name || ''}
-              onChange={handleChange}
+              onChange={(e) => setKeyword(e.target.value)}
               className="search__input"
               placeholder="Фильм"
               autoComplete="off"

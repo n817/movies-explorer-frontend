@@ -11,25 +11,26 @@ import { useState, useEffect } from 'react';
 
 function SavedMovies(
   { 
-    movies,
+    savedMovies,
     foundMovies,
-    findMovies,
     setFoundMovies,
+    renderedMovies,
+    setRenderedMovies,
+    findMovies,   
     saveMovie,
-    deleteMovie,
-    getSavedMovies
+    deleteMovie
   }) {
 
   const [moviesQuantity, setMoviesQuantity] = useState();  // Количество фильмов, отображаемых на странице
 
   
-  // Загружаем базу сохраненных фильмов
+  // Отображаем все сохраненные фильмы при загрузке страницы
   useEffect(() => {
-    getSavedMovies();
+    setFoundMovies(savedMovies)
   }, []);
 
   function setInitialMoviesQuantity() {
-    setMoviesQuantity(movies.length);
+    setMoviesQuantity(savedMovies.length);
   }
 
   return (
@@ -40,17 +41,20 @@ function SavedMovies(
 
     <main className="main-content saved-movies">
       <SearchForm 
-        movies={movies}
+        movies={savedMovies}
+        foundMovies={foundMovies}
         findMovies={findMovies}
         setFoundMovies={setFoundMovies}
         setInitialMoviesQuantity={setInitialMoviesQuantity}
       />
       <MoviesCardList 
         movies={foundMovies}
-        moviesQuantity={moviesQuantity}
+        savedMovies={savedMovies}
+        renderedMovies={renderedMovies}
+        setRenderedMovies={setRenderedMovies}
         saveMovie={saveMovie}
         deleteMovie={deleteMovie}
-        savedMovies={movies}
+        moviesQuantity={moviesQuantity}
       />
     </main>
 

@@ -12,12 +12,14 @@ import { useState } from 'react';
 function Movies(
   { 
     movies,
+    savedMovies,
     foundMovies,
-    findMovies,
     setFoundMovies,
+    renderedMovies,
+    setRenderedMovies,
+    findMovies,   
     saveMovie,
-    deleteMovie,
-    savedMovies
+    deleteMovie
   }) {
 
   const [moviesQuantity, setMoviesQuantity] = useState(); // Количество фильмов, отображаемых на странице
@@ -58,15 +60,18 @@ function Movies(
         <SearchForm
           movies={movies}
           findMovies={findMovies}
+          foundMovies={foundMovies}
           setFoundMovies={setFoundMovies}
           setInitialMoviesQuantity={setInitialMoviesQuantity}
         />
         <MoviesCardList 
           movies={foundMovies}
-          moviesQuantity={moviesQuantity}
+          savedMovies={savedMovies}
+          renderedMovies={renderedMovies}
+          setRenderedMovies={setRenderedMovies}
           saveMovie={saveMovie}
           deleteMovie={deleteMovie}
-          savedMovies={savedMovies}
+          moviesQuantity={moviesQuantity}
         />
         <button
           className={moreButtonClassname}

@@ -7,24 +7,26 @@ import { moviesApiSettings } from '../../utils/constants';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-function MoviesCard({ movie, saveMovie, deleteMovie, wasLiked }) {
+function MoviesCard({ movie, saveMovie, deleteMovie, savedMovies }) {
 
   const {duration, image, trailerLink, nameRU} = movie;
   const { pathname } = useLocation();
-  const [cardLike, setCardLike] = useState(wasLiked);
-  const cardLikeButtonClassName = 
-    (`card__like-button button-hover ${cardLike ? 'card__like-button_active' : ''}`);
+  const [cardLike, setCardLike] = useState(savedMovies.some((i) => i.movieId === movie.id || i.movieId === movie.movieId));
+  const cardLikeButtonClassName = (`card__like-button button-hover ${cardLike ? 'card__like-button_active' : ''}`);
 
+  // Обработка клика по значку лайка на странице /movies
   function onCardLike() {
     setCardLike(!cardLike);
     if (!cardLike) {
       saveMovie(movie);
     } 
     else {
-      deleteMovie(movie);
+      let savedMovie = savedMovies.find(i => i.movieId === movie.id);
+      deleteMovie(savedMovie);
     }
   }
 
+  // Обработка клика по значку удаления фильма на странице /saved-movies
   function onCardDelete() {
     deleteMovie(movie);
   }

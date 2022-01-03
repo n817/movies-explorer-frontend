@@ -26,6 +26,7 @@ function App() {
   const [allMovies, setAllMovies] = useState([]); // вся база фильмов с сервера
   const [savedMovies, setSavedMovies] = useState([]); // сохраненные фильмы
   const [foundMovies, setFoundMovies] = useState([]); // результаты поиска
+  const [renderedMovies, setRenderedMovies] = useState([]); // фильмы, отображаемые на странице
   // const [isLoading, setIsLoading] = useState(false); // включает/выключает прелоадер
 
   // Загружаем данные профиля пользователя
@@ -35,6 +36,7 @@ function App() {
         setCurrentUser(res);
         setLoggedIn(true);
         console.log(`Успешно загружены данные пользователя ${res.name}`);
+        getSavedMovies();
         navigate('/movies');
       })
       .catch((err) => {
@@ -49,6 +51,7 @@ function App() {
         if (res) {
           setCurrentUser(res);
           setLoggedIn(true);
+          getSavedMovies();
           console.log(`Успешная авторизация пользователя ${res.name}`);
           navigate('/movies');
         }
@@ -144,7 +147,8 @@ function App() {
   function saveMovie(movie) {
     mainApi.postMovie(movie)
     .then((res) => {
-      console.log(`Фильм "${movie.nameRU}" сохранен`)
+      setSavedMovies([...savedMovies, res]);
+      console.log(`Фильм "${res.nameRU}" сохранен`)
     })
     .catch((err) => {
       console.log(`При сохранении фильма ${err}`);
@@ -167,11 +171,10 @@ function App() {
   function deleteMovie(movie) {
     mainApi.deleteMovie(movie._id)
     .then((res) => { 
-      console.log(`Фильм "${res.movieData.nameRU}" успешно удален. ID: ${res.movieData._id}`);
-      const updateMovies = savedMovies.filter((i) => i.movieId !== res.movieData._id);
-      setSavedMovies(updateMovies);
+      setSavedMovies(savedMovies.filter(i => i.movieId !== res.movieData.movieId));
+      console.log(`Фильм "${res.movieData.nameRU}" успешно удален.`);
       if (pathname === '/saved-movies') {
-        setFoundMovies(updateMovies);
+        setRenderedMovies(renderedMovies.filter(i => i.movieId !== res.movieData.movieId));
       }
     })
     .catch((err) => {
@@ -223,12 +226,14 @@ function App() {
               <RequireAuth loggedIn={loggedIn}>
                 <Movies
                   movies={allMovies}
+                  savedMovies={savedMovies}
                   foundMovies={foundMovies}
-                  findMovies={findAllMovies}
                   setFoundMovies={setFoundMovies}
+                  renderedMovies={renderedMovies}
+                  setRenderedMovies={setRenderedMovies}
+                  findMovies={findAllMovies}    
                   saveMovie={saveMovie}
                   deleteMovie={deleteMovie}
-                  savedMovies={savedMovies}
                 />
               </RequireAuth>
             }
@@ -239,13 +244,14 @@ function App() {
             element={
               <RequireAuth loggedIn={loggedIn}>
                 <SavedMovies
-                  movies={savedMovies}
+                  savedMovies={savedMovies}
                   foundMovies={foundMovies}
-                  findMovies={findMovies}
                   setFoundMovies={setFoundMovies}
+                  renderedMovies={renderedMovies}
+                  setRenderedMovies={setRenderedMovies}
+                  findMovies={findMovies}
                   saveMovie={saveMovie}
                   deleteMovie={deleteMovie}
-                  getSavedMovies={getSavedMovies}
                 />
               </RequireAuth>
             }
