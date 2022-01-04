@@ -8,7 +8,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 import Preloader from '../Preloader/Preloader';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function Movies(
   { 
@@ -22,7 +22,8 @@ function Movies(
     saveMovie,
     deleteMovie,
     isLoading,
-    notFound
+    notFound,
+    setNotFound
   }) {
 
   const [moviesQuantity, setMoviesQuantity] = useState(); // Количество фильмов, отображаемых на странице
@@ -33,6 +34,11 @@ function Movies(
     ? "movies__more-button button-hover movies__more-button_visible" 
     : "movies__more-button button-hover"
   }`
+
+  // Устанавливаем исходное состояние notFound при загрузке страницы
+  useEffect(() => {
+    setNotFound(false);
+  }, []);
 
   // Сколько карточек загружать при нажатии на кнопку "Ещё"
   function moviesQuantityStep() {

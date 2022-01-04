@@ -238,6 +238,7 @@ function App() {
                   deleteMovie={deleteMovie}
                   isLoading={isLoading}
                   notFound={notFound}
+                  setNotFound={setNotFound}
                 />
               </RequireAuth>
             }
@@ -257,6 +258,7 @@ function App() {
                   saveMovie={saveMovie}
                   deleteMovie={deleteMovie}
                   notFound={notFound}
+                  setNotFound={setNotFound}
                 />
               </RequireAuth>
             }

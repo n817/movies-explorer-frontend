@@ -19,7 +19,8 @@ function SavedMovies(
     findMovies,   
     saveMovie,
     deleteMovie,
-    notFound
+    notFound,
+    setNotFound
   }) {
 
   const [moviesQuantity, setMoviesQuantity] = useState();  // Количество фильмов, отображаемых на странице
@@ -27,7 +28,8 @@ function SavedMovies(
   
   // Отображаем все сохраненные фильмы при загрузке страницы
   useEffect(() => {
-    setFoundMovies(savedMovies)
+    setFoundMovies(savedMovies);
+    setNotFound(false);
   }, []);
 
   function setInitialMoviesQuantity() {
