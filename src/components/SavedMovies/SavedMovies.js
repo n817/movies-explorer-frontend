@@ -18,7 +18,8 @@ function SavedMovies(
     setRenderedMovies,
     findMovies,   
     saveMovie,
-    deleteMovie
+    deleteMovie,
+    notFound
   }) {
 
   const [moviesQuantity, setMoviesQuantity] = useState();  // Количество фильмов, отображаемых на странице
@@ -55,6 +56,7 @@ function SavedMovies(
         saveMovie={saveMovie}
         deleteMovie={deleteMovie}
         moviesQuantity={moviesQuantity}
+        notFound={notFound}
       />
     </main>
 

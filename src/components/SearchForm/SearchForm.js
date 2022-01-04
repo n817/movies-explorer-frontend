@@ -27,6 +27,7 @@ function SearchForm({ movies, foundMovies, findMovies, setFoundMovies, setInitia
 
   function handleSubmit(e) {
     e.preventDefault();
+    setFoundMovies([]);
     setInitialMoviesQuantity();
     findMovies({ movies, keyword, isShort });
   }

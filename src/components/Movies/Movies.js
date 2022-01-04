@@ -6,6 +6,7 @@ import Navigation from '../Header/Navigation/Navigation';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
+import Preloader from '../Preloader/Preloader';
 
 import { useState } from 'react';
 
@@ -19,7 +20,9 @@ function Movies(
     setRenderedMovies,
     findMovies,   
     saveMovie,
-    deleteMovie
+    deleteMovie,
+    isLoading,
+    notFound
   }) {
 
   const [moviesQuantity, setMoviesQuantity] = useState(); // Количество фильмов, отображаемых на странице
@@ -64,6 +67,9 @@ function Movies(
           setFoundMovies={setFoundMovies}
           setInitialMoviesQuantity={setInitialMoviesQuantity}
         />
+
+        {isLoading && <Preloader/>}
+        
         <MoviesCardList 
           movies={foundMovies}
           savedMovies={savedMovies}
@@ -72,6 +78,7 @@ function Movies(
           saveMovie={saveMovie}
           deleteMovie={deleteMovie}
           moviesQuantity={moviesQuantity}
+          notFound={notFound}
         />
         <button
           className={moreButtonClassname}

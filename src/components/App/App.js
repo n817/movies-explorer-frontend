@@ -27,7 +27,8 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]); // сохраненные фильмы
   const [foundMovies, setFoundMovies] = useState([]); // результаты поиска
   const [renderedMovies, setRenderedMovies] = useState([]); // фильмы, отображаемые на странице
-  // const [isLoading, setIsLoading] = useState(false); // включает/выключает прелоадер
+  const [isLoading, setIsLoading] = useState(false); // включает/выключает прелоадер
+  const [notFound, setNotFound] = useState(false); // отвечает за сообщение, если фильмы не найдены 
 
   // Загружаем данные профиля пользователя
   useEffect(() => {
@@ -63,7 +64,6 @@ function App() {
 
   // Регистрация
   function handleSignUp({ name, email, password }) {
-    console.log({ name, email, password });
     mainApi.signUp({ name, email, password })
       .then((res) => {
         if (res) {
@@ -114,7 +114,7 @@ function App() {
 
   // Загрузка базы фильмов с сервера и передача базы в функцию поиска
   function getAllMovies({ keyword, isShort }) {
-    // setIsLoading(true) // to-do!
+    setIsLoading(true);
     moviesApi.getMoviesArray()
     .then((res) => {
       console.log(`Загружено фильмов из базы: ${res.length}`);
@@ -125,7 +125,7 @@ function App() {
         console.log(`При загрузке базы фильмов с сервера ${err}`);
       })
       .finally(() => {
-        // setIsLoading(false); // to-do!
+        setIsLoading(false);
       })
   }
 
@@ -138,8 +138,10 @@ function App() {
     if (filter.length > 0) {
       console.log(`Поиск успешно завершен, найдено фильмов: ${filter.length}`);
       setFoundMovies(filter);
+      setNotFound(false);
     } else {
-      console.log('Ничего не найдено')
+      console.log('Ничего не найдено');
+      setNotFound(true);
     }
   }
 
@@ -148,7 +150,7 @@ function App() {
     mainApi.postMovie(movie)
     .then((res) => {
       setSavedMovies([...savedMovies, res]);
-      console.log(`Фильм "${res.nameRU}" сохранен`)
+      console.log(`Фильм "${res.nameRU}" сохранен`);
     })
     .catch((err) => {
       console.log(`При сохранении фильма ${err}`);
@@ -234,6 +236,8 @@ function App() {
                   findMovies={findAllMovies}    
                   saveMovie={saveMovie}
                   deleteMovie={deleteMovie}
+                  isLoading={isLoading}
+                  notFound={notFound}
                 />
               </RequireAuth>
             }
@@ -252,6 +256,7 @@ function App() {
                   findMovies={findMovies}
                   saveMovie={saveMovie}
                   deleteMovie={deleteMovie}
+                  notFound={notFound}
                 />
               </RequireAuth>
             }

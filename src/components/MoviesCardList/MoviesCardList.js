@@ -13,8 +13,13 @@ function MoviesCardList(
     setRenderedMovies,
     saveMovie,
     deleteMovie,
-    moviesQuantity
+    moviesQuantity,
+    notFound
   }) {
+  
+  const notFoundClassname = notFound 
+    ? "movies-card-list__not-found movies-card-list__not-found_visible"
+    : "movies-card-list__not-found";
 
   // Загружаем по 7 карточек
   useEffect(() => {
@@ -23,6 +28,7 @@ function MoviesCardList(
 
   return (
     <ul className="movies-card-list">
+      <p className={notFoundClassname}>Ничего не найдено</p>
       {renderedMovies.map((movie) => 
         <MoviesCard
           key={movie.id}
