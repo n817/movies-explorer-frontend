@@ -38,7 +38,6 @@ function App() {
         setLoggedIn(true);
         console.log(`Успешно загружены данные пользователя ${res.name}`);
         getSavedMovies();
-        navigate('/movies');
       })
       .catch((err) => {
         console.log(`При загрузке данных пользователя ${err}`);
