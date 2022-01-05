@@ -67,10 +67,7 @@ function App() {
     mainApi.signUp({ name, email, password })
       .then((res) => {
         if (res) {
-          setCurrentUser(res);
-          setLoggedIn(true);
-          console.log(`Успешная авторизация пользователя ${res.name}`);
-          navigate('/movies');
+          handleSignIn({ email, password });
         }
       })
       .catch((err) => {
