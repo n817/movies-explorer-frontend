@@ -60,6 +60,7 @@
 
 .profile__options {
   display: flex;
+  position: relative;
   flex-direction: column;
   gap: 16px;
   padding-top: 220px;
@@ -73,8 +74,22 @@
   color: #FFF;
 }
 
+.profile__button_disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
 .profile__button:last-of-type {
   color: #EE3465;
+}
+
+.profile__message {
+  position: absolute;
+  bottom: 70px;
+  left: 0;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 400;
 }
 
 /* стили для экранов с разрешением менее 1024px по ширине */

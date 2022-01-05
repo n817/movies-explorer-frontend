@@ -7,21 +7,39 @@ import validator from 'validator';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useFormWithValidation } from '../../utils/Validation';
 
-import { useState, useContext } from 'react';
+import { useContext, useState, useEffect, useCallback } from 'react';
 
-function Profile({ onSignOut, onUpdate }) {
+function Profile({ onSignOut, onUpdate, messageToUser, setMessageToUser }) {
 
   const { name, email } = useContext(CurrentUserContext);
-  const { values, errors, handleChange } = useFormWithValidation();
+  const { values, errors, isValid, handleChange, resetForm } = useFormWithValidation();
+  const [currentValues, setCurrentValues] = useState({}); // текущие значения профиля
+
+  // Сохранение текущих данных профиля в currentValues
+  useEffect(() => {
+    resetForm({ name, email });
+    setCurrentValues({ name, email });
+  }, [name, email])
+
+  // Проверяем, изменились ли данные профиля
+  const isDataChanged = useCallback(() => {
+    return JSON.stringify(currentValues) !== JSON.stringify(values)
+  }, [currentValues, values])
+
+  // Проверка корректности ввода имени
+  const validateName = (e) => {
+    setMessageToUser('');
+    handleChange(e);
+  }
 
   // Проверка корректности ввода e-mail
-  const [emailError, setEmailError] = useState('');
   const validateEmail = (e) => {
+    setMessageToUser('');
     const email = e.target.value;
     if (validator.isEmail(email)) {
-      setEmailError('');
+      e.target.setCustomValidity('');
     } else {
-      setEmailError('Введите корректный e-mail!');
+      e.target.setCustomValidity('Введите корректный e-mail');
     }
     handleChange(e);
   }
@@ -40,9 +58,11 @@ function Profile({ onSignOut, onUpdate }) {
               type="text"
               name="name"
               value={values.name || ''}
-              onChange={handleChange}
+              minLength="2"
+              maxLength="30"
+              onChange={(e) => validateName(e)}
               className="profile__form-input"
-              placeholder={name}
+              placeholder="Введите имя"
               required
             />
             <span className="profile-form__error">{errors.name}</span>
@@ -54,19 +74,28 @@ function Profile({ onSignOut, onUpdate }) {
               value={values.email || ''}
               onChange={(e) => validateEmail(e)}
               className="profile__form-input"
-              placeholder={email}
+              placeholder="Введите e-mail"
               required
             />
-            <span className="profile-form__error profile-form__error_email">{emailError}</span>
+            <span className="profile-form__error profile-form__error_email">{errors.email}</span>
           </label>
         </form>
         <div className="profile__options">
           <button
+            type="submit"
             onClick={() => onUpdate(values)}
-            className="profile__button button-hover"
-          >Редактировать
+            className={`profile__button button-hover ${isValid && isDataChanged() ? '' : "profile__button_disabled"}`}
+          >
+            Сохранить
           </button>
-          <button onClick={onSignOut} className="profile__button button-hover">Выйти из аккаунта</button>
+          
+          <button 
+            onClick={onSignOut}
+            className="profile__button button-hover"
+          >
+            Выйти из аккаунта
+          </button>
+          <span className="profile__message">{messageToUser}</span>
         </div>
       </main>
     </>

@@ -5,20 +5,17 @@ import IdentityForm from '../IdentityForm/IdentityForm';
 import validator from 'validator';
 import { useFormWithValidation } from '../../utils/Validation';
 
-import { useState } from 'react';
-
 function Login({ onLogin }) {
 
   const { values, errors, isValid, handleChange } = useFormWithValidation();
 
   // Проверка корректности ввода e-mail
-  const [emailError, setEmailError] = useState('');
   const validateEmail = (e) => {
     const email = e.target.value;
     if (validator.isEmail(email)) {
-      setEmailError('');
+      e.target.setCustomValidity('');
     } else {
-      setEmailError('Введите корректный e-mail!');
+      e.target.setCustomValidity('Введите корректный e-mail');
     }
     handleChange(e);
   }
@@ -43,7 +40,7 @@ function Login({ onLogin }) {
           placeholder="введите e-mail"
           required
         />
-        <span className="identity-form__error">{emailError}</span>
+        <span className="identity-form__error">{errors.email}</span>
       </label>
       <label className="identity-form__label">Пароль
         <input

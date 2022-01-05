@@ -33,7 +33,13 @@ function IdentityForm({
         >
           <h2 className="identity-form__title">{title}</h2>
           { children }
-          <button className="identity-form__submit-button">{submitButtonText}</button>
+          <button
+            type="submit"
+            disabled={!isValid}
+            className={`identity-form__submit-button button-hover ${isValid ? "" : "identity-form__submit-button_disabled"}`}
+          >
+            {submitButtonText}
+          </button>
           <p className="identity-form__navigation">{navigationText}
             <Link to={link} className="identity-form__link button-hover">{linkText}</Link>
           </p>

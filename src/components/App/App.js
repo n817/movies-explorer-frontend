@@ -28,7 +28,8 @@ function App() {
   const [foundMovies, setFoundMovies] = useState([]); // результаты поиска
   const [renderedMovies, setRenderedMovies] = useState([]); // фильмы, отображаемые на странице
   const [isLoading, setIsLoading] = useState(false); // включает/выключает прелоадер
-  const [notFound, setNotFound] = useState(false); // отвечает за сообщение, если фильмы не найдены 
+  const [notFound, setNotFound] = useState(false); // отвечает за сообщение, если фильмы не найдены
+  const [messageToUser, setMessageToUser] = useState(''); // сообщение пользователю
 
   // Загружаем данные профиля пользователя
   useEffect(() => {
@@ -80,7 +81,10 @@ function App() {
   // Выход из учетной записи пользователя
   function handleSignOut() {
     mainApi.signOut()
-      .then((res) => console.log(`Пользователь разлогинен, статус ${res.status}`))
+      .then((res) => {
+        console.log(`Пользователь разлогинен, статус ${res.status}`);
+        navigate('/');
+      })
       .catch(err => console.log(`При выходе ${err}`));
     setLoggedIn(false);
   }
@@ -90,10 +94,11 @@ function App() {
     mainApi.patchMe({name, email})
     .then((res) => {
       setCurrentUser(res);
-      })
+      setMessageToUser('Данные успешно обновлены');
+    })
     .catch((err) => {
-       console.log(`При обновлении данных пользователя ${err}`);
-      })
+      setMessageToUser(err);
+    })
   }
 
   // Обработка поискового запроса по всей базе фильмов.
@@ -216,6 +221,8 @@ function App() {
                 <Profile
                   onSignOut={handleSignOut}
                   onUpdate={handleUpdateProfile}
+                  messageToUser={messageToUser}
+                  setMessageToUser={setMessageToUser}
                 />
               </RequireAuth>
             }
