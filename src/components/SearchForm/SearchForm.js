@@ -3,16 +3,23 @@
 import './SearchForm.css';
 import searchIcon from '../../images/search-icon.svg';
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
-function SearchForm({ movies, foundMovies, findMovies, setFoundMovies, setInitialMoviesQuantity }) {
+function SearchForm(
+  { 
+    movies,
+    foundMovies,
+    findMovies,
+    setFoundMovies,
+    setInitialMoviesQuantity,
+    isShort,
+    setIsShort,
+    keyword,
+    setKeyword
+  }) {
 
-  const [keyword, setKeyword] = useState(''); // текст запроса
-  const [isShort, setIsShort] = useState(false); // состояние переключателя короткометражек
-
-  // Очищаем результаты поиска при загрузке страницы
+  // Устанавливаем исходное количество отображаемых карточек при загрузке страницы
   useEffect(() => {
-    setFoundMovies([]);
     setInitialMoviesQuantity();
   }, []);
 
@@ -42,6 +49,7 @@ function SearchForm({ movies, foundMovies, findMovies, setFoundMovies, setInitia
               type="text"
               name="name"
               onChange={(e) => setKeyword(e.target.value)}
+              value={keyword}
               className="search__input"
               placeholder="Фильм"
               autoComplete="off"
@@ -53,6 +61,7 @@ function SearchForm({ movies, foundMovies, findMovies, setFoundMovies, setInitia
               <input
                 type="checkbox"
                 name="isShort"
+                checked={isShort}
                 onChange={() => setIsShort(!isShort)}
                 className="search__checkbox-hidden"
               />

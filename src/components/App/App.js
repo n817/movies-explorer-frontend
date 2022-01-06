@@ -13,6 +13,7 @@ import mainApi from '../../utils/MainApi';
 import moviesApi from '../../utils/MoviesApi';
 import RequireAuth from '../RequireAuth/RequireAuth';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { SHORTFILM_DURATION } from '../../utils/constants';
 
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
@@ -25,11 +26,14 @@ function App() {
 
   const [allMovies, setAllMovies] = useState([]); // вся база фильмов с сервера
   const [savedMovies, setSavedMovies] = useState([]); // сохраненные фильмы
-  const [foundMovies, setFoundMovies] = useState([]); // результаты поиска
+  const [foundMovies, setFoundMovies] = useState([]); // результаты поиска по всем фильмам
+  const [foundSavedMovies, setFoundSavedMovies] = useState([]); // результаты поиска по сохраненным фильмам
   const [renderedMovies, setRenderedMovies] = useState([]); // фильмы, отображаемые на странице
   const [isLoading, setIsLoading] = useState(false); // включает/выключает прелоадер
   const [notFound, setNotFound] = useState(false); // отвечает за сообщение, если фильмы не найдены
   const [messageToUser, setMessageToUser] = useState(''); // сообщение пользователю
+  const [isShortMovies, setIsShortMovies] = useState(false); // состояние переключателя короткометражек для страницы /movies
+  const [keywordMovies, setKeywordMovies] = useState(''); // текст запроса для страницы /movies
 
   // Загружаем данные профиля пользователя
   useEffect(() => {
@@ -79,6 +83,9 @@ function App() {
   function handleSignOut() {
     mainApi.signOut()
       .then((res) => {
+        setIsShortMovies(false);
+        setKeywordMovies('');
+        setFoundMovies([]);
         console.log(`Пользователь разлогинен, статус ${res.status}`);
         navigate('/');
       })
@@ -134,11 +141,11 @@ function App() {
   function findMovies({ movies, keyword, isShort }) {
     const filter = movies.filter((i) =>
       i.nameRU.toLowerCase().includes(keyword.toLowerCase()) 
-      && (isShort ? (i.duration <= 40) : true)
+      && (isShort ? (i.duration <= SHORTFILM_DURATION) : true)
     );
     if (filter.length > 0) {
       console.log(`Поиск успешно завершен, найдено фильмов: ${filter.length}`);
-      setFoundMovies(filter);
+      pathname === '/saved-movies' ? setFoundSavedMovies(filter) : setFoundMovies(filter);
       setNotFound(false);
     } else {
       console.log('Ничего не найдено');
@@ -242,6 +249,10 @@ function App() {
                   isLoading={isLoading}
                   notFound={notFound}
                   setNotFound={setNotFound}
+                  isShort={isShortMovies}
+                  setIsShort={setIsShortMovies}
+                  keyword={keywordMovies}
+                  setKeyword={setKeywordMovies}
                 />
               </RequireAuth>
             }
@@ -253,8 +264,8 @@ function App() {
               <RequireAuth loggedIn={loggedIn}>
                 <SavedMovies
                   savedMovies={savedMovies}
-                  foundMovies={foundMovies}
-                  setFoundMovies={setFoundMovies}
+                  foundMovies={foundSavedMovies}
+                  setFoundMovies={setFoundSavedMovies}
                   renderedMovies={renderedMovies}
                   setRenderedMovies={setRenderedMovies}
                   findMovies={findMovies}

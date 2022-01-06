@@ -3,7 +3,7 @@
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 function MoviesCardList(
   {
@@ -21,10 +21,10 @@ function MoviesCardList(
     ? "movies-card-list__not-found movies-card-list__not-found_visible"
     : "movies-card-list__not-found";
 
-  // Загружаем по 7 карточек
+  // Если фильмы найдены, то загружаем по 7 карточек
   useEffect(() => {
-    setRenderedMovies(movies.slice(0, moviesQuantity));
-  }, [movies, moviesQuantity]);
+    notFound ? setRenderedMovies([]) : setRenderedMovies(movies.slice(0, moviesQuantity));
+  }, [movies, moviesQuantity, notFound]);
 
   return (
     <ul className="movies-card-list">

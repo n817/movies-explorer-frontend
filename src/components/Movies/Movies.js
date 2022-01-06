@@ -7,6 +7,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 import Preloader from '../Preloader/Preloader';
+import { MOBILE_RESOLUTION, CARDS_QUANTITY, CARDS_QUANTITY_MOBILE } from '../../utils/constants';
 
 import { useState, useEffect } from 'react';
 
@@ -23,7 +24,11 @@ function Movies(
     deleteMovie,
     isLoading,
     notFound,
-    setNotFound
+    setNotFound,
+    isShort,
+    setIsShort,
+    keyword,
+    setKeyword
   }) {
 
   const [moviesQuantity, setMoviesQuantity] = useState(); // Количество фильмов, отображаемых на странице
@@ -42,10 +47,10 @@ function Movies(
 
   // Сколько карточек загружать при нажатии на кнопку "Ещё"
   function moviesQuantityStep() {
-    if (window.innerWidth > 649) {
-        return 7;
+    if (window.innerWidth > MOBILE_RESOLUTION) {
+        return CARDS_QUANTITY;
     } else {
-        return 5;
+        return CARDS_QUANTITY_MOBILE;
     }
   };
 
@@ -56,8 +61,6 @@ function Movies(
   function handleMoreClick() {
     setMoviesQuantity(moviesQuantity + moviesQuantityStep());
   }
-
-
 
   return (
     <>
@@ -72,6 +75,10 @@ function Movies(
           foundMovies={foundMovies}
           setFoundMovies={setFoundMovies}
           setInitialMoviesQuantity={setInitialMoviesQuantity}
+          isShort={isShort}
+          setIsShort={setIsShort}
+          keyword={keyword}
+          setKeyword={setKeyword}
         />
 
         {isLoading && <Preloader/>}

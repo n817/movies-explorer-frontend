@@ -24,7 +24,8 @@ function SavedMovies(
   }) {
 
   const [moviesQuantity, setMoviesQuantity] = useState();  // Количество фильмов, отображаемых на странице
-
+  const [isShortSavedMovies, setIsShortSavedMovies] = useState(false); // состояние переключателя короткометражек
+  const [keywordSavedMovies, setKeywordSavedMovies] = useState(''); // текст запроса
   
   // Отображаем все сохраненные фильмы при загрузке страницы
   useEffect(() => {
@@ -49,6 +50,10 @@ function SavedMovies(
         findMovies={findMovies}
         setFoundMovies={setFoundMovies}
         setInitialMoviesQuantity={setInitialMoviesQuantity}
+        isShort={isShortSavedMovies}
+        setIsShort={setIsShortSavedMovies}
+        keyword={keywordSavedMovies}
+        setKeyword={setKeywordSavedMovies}
       />
       <MoviesCardList 
         movies={foundMovies}

@@ -12,4 +12,16 @@ const moviesApiSettings = {
   },
 };
 
-export { mainApiSettings, moviesApiSettings };
+const SHORTFILM_DURATION = 40;
+const MOBILE_RESOLUTION = 649;
+const CARDS_QUANTITY = 7;
+const CARDS_QUANTITY_MOBILE = 5;
+
+export { 
+  mainApiSettings,
+  moviesApiSettings,
+  SHORTFILM_DURATION,
+  MOBILE_RESOLUTION,
+  CARDS_QUANTITY,
+  CARDS_QUANTITY_MOBILE
+};
