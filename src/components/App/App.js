@@ -34,7 +34,7 @@ function App() {
   const [messageToUser, setMessageToUser] = useState(''); // сообщение пользователю
   const [isShortMovies, setIsShortMovies] = useState(false); // состояние переключателя короткометражек для страницы /movies
   const [keywordMovies, setKeywordMovies] = useState(''); // текст запроса для страницы /movies
-
+  
   // Загружаем данные профиля пользователя
   useEffect(() => {
     mainApi.getMe()
@@ -43,11 +43,28 @@ function App() {
         setLoggedIn(true);
         console.log(`Успешно загружены данные пользователя ${res.name}`);
         getSavedMovies();
+
       })
       .catch((err) => {
         console.log(`При загрузке данных пользователя ${err}`);
       });
   }, [])
+
+  // Загружаем базу фильмов и результаты поиска из localStorage
+  useEffect(() => {
+    const storedAllMovies = localStorage.getItem('allMovies');
+    const storedFoundMovies = localStorage.getItem('foundMovies');
+    const storedKeyword = localStorage.getItem('keyword');
+    const storedIsShort = localStorage.getItem('isShort');
+
+    if (loggedIn && storedAllMovies && storedFoundMovies && storedKeyword && storedIsShort) {
+      setAllMovies(JSON.parse(storedAllMovies));
+      setFoundMovies(JSON.parse(storedFoundMovies));
+      setKeywordMovies(JSON.parse(storedKeyword));
+      setIsShortMovies(JSON.parse(storedIsShort));
+    }
+    return;
+  }, [loggedIn]);
 
   // Авторизация
   function handleSignIn({ email, password }) {
@@ -83,9 +100,10 @@ function App() {
   function handleSignOut() {
     mainApi.signOut()
       .then((res) => {
-        setIsShortMovies(false);
-        setKeywordMovies('');
-        setFoundMovies([]);
+        localStorage.removeItem('allMovies');
+        localStorage.removeItem('foundMovies');
+        localStorage.removeItem('keyword');
+        localStorage.removeItem('isShort');
         console.log(`Пользователь разлогинен, статус ${res.status}`);
         navigate('/');
       })
@@ -128,6 +146,7 @@ function App() {
       console.log(`Загружено фильмов из базы: ${res.length}`);
       findMovies({ movies: res, keyword, isShort });
       setAllMovies(res);
+      localStorage.setItem('allMovies', JSON.stringify(res));
       })
       .catch((err) => {
         console.log(`При загрузке базы фильмов с сервера ${err}`);
@@ -145,13 +164,24 @@ function App() {
     );
     if (filter.length > 0) {
       console.log(`Поиск успешно завершен, найдено фильмов: ${filter.length}`);
-      pathname === '/saved-movies' ? setFoundSavedMovies(filter) : setFoundMovies(filter);
       setNotFound(false);
     } else {
       console.log('Ничего не найдено');
       setNotFound(true);
     }
+    pathname === '/movies' ? saveToLocalStorage(filter, keyword, isShort) : setFoundSavedMovies(filter);
   }
+
+  // Сохранение результатов поиска в localStorage
+  function saveToLocalStorage(filter, keyword, isShort) {
+    setFoundMovies(filter);
+    console.log(filter);
+    console.log(keyword);
+    console.log(isShort);
+    localStorage.setItem('foundMovies', JSON.stringify(filter));
+    localStorage.setItem('keyword', JSON.stringify(keyword));
+    localStorage.setItem('isShort', JSON.stringify(isShort));
+  };
 
   // Сохранение фильма
   function saveMovie(movie) {

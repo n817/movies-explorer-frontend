@@ -24,13 +24,14 @@ function SearchForm(
   }, []);
 
   // Фильтр короткометражек в результатах поиска
-  useEffect(() => {
+  function handleIsShortChange() {
     if (foundMovies.length > 0) {
-      findMovies({ movies, keyword, isShort });
+      findMovies({ movies, keyword, isShort: !isShort });
     } else {
       console.log('Нечего фильтровать')
     }
-  }, [isShort]);
+    setIsShort(!isShort);
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -62,7 +63,7 @@ function SearchForm(
                 type="checkbox"
                 name="isShort"
                 checked={isShort}
-                onChange={() => setIsShort(!isShort)}
+                onChange={handleIsShortChange}
                 className="search__checkbox-hidden"
               />
               <span className="search__checkbox-visible"></span>
