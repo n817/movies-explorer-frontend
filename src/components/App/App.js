@@ -175,9 +175,6 @@ function App() {
   // Сохранение результатов поиска в localStorage
   function saveToLocalStorage(filter, keyword, isShort) {
     setFoundMovies(filter);
-    console.log(filter);
-    console.log(keyword);
-    console.log(isShort);
     localStorage.setItem('foundMovies', JSON.stringify(filter));
     localStorage.setItem('keyword', JSON.stringify(keyword));
     localStorage.setItem('isShort', JSON.stringify(isShort));
