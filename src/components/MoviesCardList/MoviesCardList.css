@@ -6,6 +6,17 @@
   padding: 70px 0 0;
 }
 
+.movies-card-list__not-found {
+  display: none;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.movies-card-list__not-found_visible {
+  display: inline-block;
+}
+
 /* стили для экранов с разрешением менее 650px по ширине */
 
 @media screen and (max-width: 649px) {

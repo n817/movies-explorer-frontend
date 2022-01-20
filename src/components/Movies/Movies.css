@@ -1,4 +1,5 @@
 .movies__more-button {
+  display: none;
   width: 320px;
   height: 36px;
   border: none;
@@ -11,6 +12,10 @@
   line-height: 15px;
   margin-top: 50px;
   margin-bottom: 80px;
+}
+
+.movies__more-button_visible {
+  display: inline-block;
 }
 
 /* стили для экранов с разрешением менее 650px по ширине */

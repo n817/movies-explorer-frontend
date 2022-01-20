@@ -2,7 +2,7 @@
 
 import './Navigation.css';
 import MobileNavigation from '../MobileNavigation/MobileNavigation';
-import React from 'react';
+
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
